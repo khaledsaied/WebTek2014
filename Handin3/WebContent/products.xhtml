@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      template="template.xhtml">
+    <ui:define name="mainContainer">
+		
+		
+	<h2>Product List</h2>
+   <h:form>
+      <h:dataTable value="#{itemBean.items}" var="item"
+      	 styleClass="itemTable"
+         headerClass="itemTableHeader"
+         rowClasses="itemTableOddRow,itemTableEvenRow">
+         <h:column>    				
+            <f:facet name="header">ID</f:facet>    				
+            #{item.ID}
+         </h:column>
+         <h:column>    				
+            <f:facet name="header">Name</f:facet>    				
+            #{item.name}
+         </h:column>
+         <h:column>    				
+            <f:facet name="header">Price</f:facet>    				
+            #{item.price}
+         </h:column>
+         <h:column>    				
+            <f:facet name="header">URL</f:facet>    				
+            #{item.URL}
+         </h:column>
+         <h:column>    				
+            <f:facet name="header">Stock</f:facet>    				
+            #{item.stock}
+         </h:column>
+         <h:column>    				
+            <f:facet name="header">Description</f:facet>    				
+            #{item.description}
+         </h:column>
+      </h:dataTable>
+   </h:form>
+		
+	</ui:define>
+</ui:composition>
+
+
