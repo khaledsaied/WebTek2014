@@ -43,26 +43,27 @@ public class LoginServlet {
 	public String checkLogin() throws IOException, JDOMException {		
 		for (Customer customer : _customers) {		
 			System.out.println("in forech...");
-			if(customer.getName().equals(_adminName))
-			{
-				System.out.println("I am inside first if...");
+			//if(customer.getName().equals(_adminName))
+			//{			
 				r = _cloud.login(_userName, _password);
-				// if (responseCode == 200)
-				System.out.println("VALID USER? " + r);
-				// SESSION OG SÆT ATTRIBUTE 
-				FacesContext context = FacesContext.getCurrentInstance();  
-				HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();  
-				HttpSession httpSession = request.getSession(false);  
-				httpSession.setAttribute("loggedIn", true);
-				
-				return "SUCCESSFUL ADMIN LOGIN";			
-			}
-			else if (_userName == "" || _password == "" || (_userName ==  "" && _password == "")) {
-				System.out.println("else if");
+				if (_cloud.responseCode == 200)
+				{
+					if(customer.getName().equals(_adminName))	{
+						System.out.println("VALID USER? " + r);
+						// SESSION OG SÆT ATTRIBUTE 
+						FacesContext context = FacesContext.getCurrentInstance();  
+						HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();  
+						HttpSession httpSession = request.getSession(false);  
+						httpSession.setAttribute("loggedIn", true);
+						
+						return "SUCCESSFUL ADMIN LOGIN";
+					}
+				}
+			//}
+			else {
+				System.out.println("UNVALID USER?? RESPONSECODE: " + _cloud.responseCode);
 				return "FAIL LOGIN";
 			}
-			//else if (responseCode == 400) 
-			//	return "FAIL LOGIN";
 		}
 		
 		return "FAIL LOGIN";

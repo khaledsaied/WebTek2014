@@ -26,8 +26,8 @@ public class CloudHandler {
 	private static String baseUrl = "http://services.brics.dk/java4/cloud/";
 	private static Namespace ns = Namespace.getNamespace("http://www.cs.au.dk/dWebTek/2014");
 	private static HttpURLConnection cloudCon;
-	//String validatorPath = "Validator"+File.separator+"cloud.xsd";
-	String validatorPath = "/Users/khaledsaied/Dropbox/IKT [6. SEMESTER]/WebTek/MacEclipse/Handin3/WebContent/WEB-INF/Validator/cloud.xsd";
+	String validatorPath = "Validator"+File.separator+"cloud.xsd";
+	//String validatorPath = "/Users/khaledsaied/Dropbox/IKT [6. SEMESTER]/WebTek/MacEclipse/Handin3/WebContent/WEB-INF/Validator/cloud.xsd";
 	//private static String _customerID = null;
 	private static String _itemID = null;
 	//private static String _loginResponse = null;
@@ -78,7 +78,7 @@ public class CloudHandler {
 		e5.setText(item.getURL());
 		root.addContent(e5);
 		Element e6 = new Element("itemDescription", ns);
-		e6.addContent(generateItemDescriptionHTML(new Element("document",ns).setText(item.getDescription())));
+		e6.addContent(new Element("document",ns).setText(item.getDescription()));
 		root.addContent(e6);
 	
 		Document doc = new Document(root);
@@ -159,13 +159,13 @@ public class CloudHandler {
 			return;
 		}
 	}
-	public void adjustItemStock(int itemID, int adjustment) throws IOException, JDOMException {
+	public void adjustItemStock(int adjustment) throws IOException, JDOMException {
 		Element root = new Element("adjustItemStock", ns);
 		Element e1 = new Element("shopKey", ns);
 		e1.setText(_shopKey);
 		root.addContent(e1);
 		Element e2 = new Element("itemID", ns);
-		e2.setText(Integer.toString(itemID));
+		e2.setText(_itemID);
 		root.addContent(e2);
 		Element e3 = new Element("adjustment", ns);
 		e3.setText(Integer.toString(adjustment));

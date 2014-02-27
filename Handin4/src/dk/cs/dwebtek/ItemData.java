@@ -31,7 +31,7 @@ public class ItemData implements Serializable {
 	public void setItem(Item item) {
 		this.item = item;
 	}
-	private int adjustStock;
+	private int stock = 0;
 	
 
 	private CloudHandler _cloud = new CloudHandler();
@@ -39,7 +39,7 @@ public class ItemData implements Serializable {
 	   
 	public ArrayList<Item> getItems() throws IOException, JDOMException {
 		System.out.println("GET ITEMS??");
-	   	  if(items == null) // Hvis udkommenteret, så virker modifyItem, hvis ikke, så virker createItem.
+	   	 // if(items == null) // Hvis udkommenteret, så virker modifyItem, hvis ikke, så virker createItem.
 	   		items = _cloud.listItems();
 	   		  
 	      return items;
@@ -56,18 +56,23 @@ public class ItemData implements Serializable {
 		
 		return "ADMIN";
 	}
-	public String adjustStock(int adj) throws IOException, JDOMException {
-		_cloud.adjustItemStock(item.getID(), adj);
+	public String adjustStock(int adj)  {
+		try {
+			_cloud.adjustItemStock(adj);
+		} catch (IOException | JDOMException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return "ADJUST";
 	}
 
-	public int getAdjustStock() {
-		return adjustStock;
+	public int getStock() {
+		return this.stock;
 	}
 
-	public void setAdjustStock(int adjustStock) {
-		this.adjustStock = adjustStock;
+	public void setStock(int aStock) {
+		this.stock = aStock;
 	}
 	
 }

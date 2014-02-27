@@ -8,8 +8,8 @@
     <ui:define name="mainContainer">
     <h2>Adjust Stock</h2>
     <h:form>
-    <h:inputText value="#{itemBean.adjustStock}" pt:placeholder="Stock"/>
-    <h:commandButton value="Adjust Stock" action="#{itemBean.adjustStock(itemBean.adjustStock)}" />
+    <h:inputText value="#{itemBean.stock}" pt:placeholder="Stock"/>
+    <h:commandButton value="Adjust Stock" action="#{itemBean.adjustStock(itemBean.stock)}" />
     </h:form>
    	</ui:define>
 </ui:composition>
