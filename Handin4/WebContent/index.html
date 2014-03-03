@@ -1,48 +1,33 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      template="template.xhtml">
-    <ui:define name="mainContainer">
-    
-    	<h1 class="bodyTitle">Welcome to PerleBody!</h1>
-		<p>This is a paragraph!</p>
-		<ul>
-			<li>Protein Powder</li>
-			<li>Amino Acids</li>
-			<li>Protein Bars</li>            
-		</ul>
-		<span id="buildMsg">This site is under construction!</span>
-		<div id="products">
-		<h1>Product Teasers</h1>
-		<table>
-			<thead>
-				<tr>
-					<td>Product</td>
-					<td>Price</td>
-					<td>Description</td>						
-				</tr>
-			</thead>
-			<tr>
-				<td>PerleBody Whey 100(1 kg)</td>
-				<td>150.00 DKK</td>
-				<td>PerleBody Whey 100 is a Danish-produced protein powder derived from cow's milk, using modern techniques and filtration processes. Whey  PerleBody 100 is made up of a mixture of 100% pure undenatured whey protein concentrate and whey protein isolate of the highest quality. Whey protein is known for its versatile amino acid profile which gives the product a wide range of applications.</td>
-			</tr>
-			<tr>
-				<td>PerleBody Power Protein Bar</td>
-				<td>15.00 DKK</td>
-				<td>
-					A Power Protein Bar from PerleBody you get a: 
-					<ol> 
-						<li>High protein (30-31 grams per. Bar)</li>
-						<li>High fiber (12-13 grams per square meter. Bar)</li>
-						<li>Low sugar (3-4 grams per. Bar)</li>
-					</ol>
-				</td>
-			</tr>
-		</table>
-		</div>			
-    
-   	</ui:define>
-</ui:composition>
+      xmlns:pb="http://java.sun.com/jsf/composite/tutorialspoint">
+	<head>
+		<meta http-equiv="cache-control" content="no-store"/>
+		<link href="style.css" rel="stylesheet" type="text/css"/>	
+		<title>PerleBody</title>	
+	</head>
+	<body>
+		<div id="topMenu">			
+			<ul>
+				<li class="first"><a href="index.html">HOME</a></li>
+				<li><a href="products.html">PRODUCTS</a></li>
+				<li><a href="#">ABOUT US</a></li>
+				<li><a href="#">CONTACT</a></li>
+				<li class="login"><a href="login.jsf">LOGIN</a></li>					
+			</ul>
+		</div>
+		<div id="mainContainer">
+		</div>
+		<div id="footer">
+			<ul>
+				<li class="first"><a href="#">PerleBody</a></li>
+				<li>Åbogade 34 - 5342 ADA026</li>
+				<li>E-mail: <a href="mailto:11638@iha.dk?Subject=Help%20Me">11638@iha.dk</a> and <a href="mailto:10898@iha.dk?Subject=Help%20Me">10898@iha.dk</a></li>				
+			</ul>
+		</div>
+	</body>
+</html>
