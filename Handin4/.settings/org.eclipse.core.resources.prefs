@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
+encoding//WebContent/index.html=UTF-8
+encoding//WebContent/products.html=UTF-8
 encoding//src/dk/cs/dwebtek/CloudHandler.java=UTF-8
 encoding//src/dk/cs/dwebtek/ItemData.java=UTF-8
 encoding//src/dk/cs/dwebtek/LoginServlet.java=UTF-8

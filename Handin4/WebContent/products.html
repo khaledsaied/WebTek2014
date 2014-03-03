@@ -1,13 +1,9 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:pb="http://java.sun.com/jsf/composite/tutorialspoint">
+<!DOCTYPE html>
+<html>
 	<head>
 		<meta http-equiv="cache-control" content="no-store"/>
 		<link href="style.css" rel="stylesheet" type="text/css"/>	
+		<script type="text/javascript" src="script.js"></script>
 		<title>PerleBody</title>	
 	</head>
 	<body>
@@ -23,38 +19,19 @@
 		<div id="mainContainer">
 		
 	<h2>Product List</h2>
-   <h:form>
-      <h:dataTable value="#{itemBean.items}" var="item"
-      	 styleClass="itemTable"
-         headerClass="itemTableHeader"
-         rowClasses="itemTableOddRow,itemTableEvenRow">
-         <h:column>    				
-            <f:facet name="header">ID</f:facet>    				
-            #{item.ID}
-         </h:column>
-         <h:column>    				
-            <f:facet name="header">Name</f:facet>    				
-            #{item.name}
-         </h:column>
-         <h:column>    				
-            <f:facet name="header">Price</f:facet>    				
-            #{item.price}
-         </h:column>
-         <h:column>    				
-            <f:facet name="header">URL</f:facet>    				
-            #{item.URL}
-         </h:column>
-         <h:column>    				
-            <f:facet name="header">Stock</f:facet>    				
-            #{item.stock}
-         </h:column>
-         <h:column>    				
-            <f:facet name="header">Description</f:facet>    				
-            #{item.description}
-         </h:column>
-      </h:dataTable>
-   </h:form>
-   
+   <table style="border: 1px solid gray">
+    <thead>
+    <tr>
+        <td>Name</td>
+        <td>Price</td>
+    </tr>
+    </thead>
+
+    <tbody id="itemtablebody">
+
+    </tbody>
+</table>
+<input type="button" value="Update table from server!" id="update">
 </div>
 		<div id="footer">
 			<ul>
