@@ -6,6 +6,13 @@ $(document).ready(function() {
             addItemsToTable(items);
 		});
 	});
+	('#homePage').click( function() {
+		$('#mainContainer').html('<table id="itemtablebody"></table>');
+		$.get('rest/shop/items', function(itemsText) {
+			var items = JSON.parse(itemsText);
+            addItemsToTable(items);
+		});
+	});
 
 });
 
