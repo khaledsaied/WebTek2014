@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$('#homePage').click( function() {
-		$('#mainContainer').load('home.html')
+		$('#mainContainer').load('home.html');
 	});
 	$('#productsPage').click( function() {
 		$('#mainContainer').load('products.html');
