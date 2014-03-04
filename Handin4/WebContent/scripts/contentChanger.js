@@ -1,22 +1,22 @@
 $(document).ready(function() {
 	$('#homePage').click( function() {
-		$('#mainContainer').html('HOME');
+		$('#mainContainer').load('home.html')
 	});
 	$('#productsPage').click( function() {
-		$('#mainContainer').html('PRODUCTS<br/><table id="itemtablebody"></table>');
+		$('#mainContainer').load('products.html');
 		$.get('rest/shop/items', function(itemsText) {
 			var items = JSON.parse(itemsText);
             addItemsToTable(items);
 		});
 	});
 	$('#aboutPage').click( function() {
-		$('#mainContainer').html('ABOUT US');
+		$('#mainContainer').load('about.html');
 	});
 	$('#contactPage').click( function() {
-		$('#mainContainer').html('CONTACT');
+		$('#mainContainer').load('contact.html');
 	});
 	$('#basketPage').click( function() {
-		$('#mainContainer').html('BASKET');
+		$('#mainContainer').load('basket.html');
 	});
 	$('#loginPage').click( function() {
 		$('#mainContainer').html('LOGIN');
