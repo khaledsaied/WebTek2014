@@ -19,7 +19,7 @@ $(document).ready(function() {
 		$('#mainContainer').load('basket.html');
 	});
 	$('#loginPage').click( function() {
-		$('#mainContainer').html('LOGIN');
+		$('#mainContainer').load('login.html');
 	});
 
 });
