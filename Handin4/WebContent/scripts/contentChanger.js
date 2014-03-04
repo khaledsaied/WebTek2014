@@ -1,17 +1,25 @@
 $(document).ready(function() {
-	$('#aboutPage').click( function() {
-		$('#mainContainer').html('<table id="itemtablebody"></table>');
+	$('#homePage').click( function() {
+		$('#mainContainer').html('HOME');
+	});
+	$('#productsPage').click( function() {
+		$('#mainContainer').html('PRODUCTS<br/><table id="itemtablebody"></table>');
 		$.get('rest/shop/items', function(itemsText) {
 			var items = JSON.parse(itemsText);
             addItemsToTable(items);
 		});
 	});
-	('#homePage').click( function() {
-		$('#mainContainer').html('<table id="itemtablebody"></table>');
-		$.get('rest/shop/items', function(itemsText) {
-			var items = JSON.parse(itemsText);
-            addItemsToTable(items);
-		});
+	$('#aboutPage').click( function() {
+		$('#mainContainer').html('ABOUT US');
+	});
+	$('#contactPage').click( function() {
+		$('#mainContainer').html('CONTACT');
+	});
+	$('#basketPage').click( function() {
+		$('#mainContainer').html('BASKET');
+	});
+	$('#loginPage').click( function() {
+		$('#mainContainer').html('LOGIN');
 	});
 
 });
