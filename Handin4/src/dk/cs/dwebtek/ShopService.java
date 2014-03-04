@@ -1,5 +1,9 @@
 package dk.cs.dwebtek;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import org.jdom2.JDOMException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -44,4 +48,19 @@ public class ShopService {
         //You can create a MessageBodyWriter so you don't have to call toString() every time
         return array.toString();
     }
+  
+    
+    CloudHandler cloud = new CloudHandler();
+    @GET
+    @Path("xmlitems")
+    public String convertXMLtoJSON() throws IOException, JDOMException
+    {
+    	ArrayList<Item> items = cloud.listItems();
+    	JSONArray mJSONArray = new JSONArray(items);
+    	
+    	//JSONObject jsonObject1 = new JSONObject();
+    	
+    	return mJSONArray.toString();
+    }
+    
 }

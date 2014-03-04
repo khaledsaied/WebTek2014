@@ -179,24 +179,41 @@ Basket styling
 	font-weight: bold;
 }
 
-/*** JSF TABLE DESIGN ***/
-.itemTable {
-	font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif",
-		Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif",
-		Georgia, serif;
-	border-collapse: collapse;
-	border: 1px solid #000000;
-}
 
-.itemTableHeader {
+/*** TABLE DESIGN ***/ 
+#itemtablebody { 
+	font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+	border-collapse:collapse;
+	border:1px solid #000000;	
+}
+#itemtablebody th {
 	color: #FFFFFF;
+	font-size:22px;
+	text-align:center;
+	background:none repeat scroll 0 0 #2b2b2b;/*#B5B5B5;*/
+	border-bottom:1px solid #000000;  
+	padding:5px;
 	font-size: 22px;
 	text-align: center;
 	background: none repeat scroll 0 0 #2b2b2b; /*#B5B5B5;*/
 	border-bottom: 1px solid #000000;
 	padding: 2px;
 }
+#itemtablebody tr:nth-child(odd) {
+	color:#666666;
+	text-align:center;
+	background:none repeat scroll 0 0 white;
+}
+#itemtablebody tr:nth-child(even) {
+	color:#666666;
+	text-align:center;
+	background:none repeat scroll 0 0 #D9D9D9;	
+}
+/*************************************/
 
+
+/*** JSF TABLE DESIGN ***/
+/*
 .itemTableOddRow {
 	color: #666666;
 	text-align: center;
@@ -204,10 +221,10 @@ Basket styling
 }
 
 .itemTableEvenRow {
-	color: #666666;
-	text-align: center;
-	background: none repeat scroll 0 0 #D9D9D9;
-}
+	color:#666666;
+	text-align:center;
+	background:none repeat scroll 0 0 #D9D9D9;
+}*/
 /************************/
 .createItem {
 	font-weight: bold;

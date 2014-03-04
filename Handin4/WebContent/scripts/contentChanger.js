@@ -4,7 +4,7 @@ $(document).ready(function() {
 	});
 	$('#productsPage').click( function() {
 		$('#mainContainer').load('products.html');
-		$.get('rest/shop/items', function(itemsText) {
+		$.get('rest/shop/xmlitems', function(itemsText) {
 			var items = JSON.parse(itemsText);
             addItemsToTable(items);
 		});
@@ -15,9 +15,6 @@ $(document).ready(function() {
 	$('#contactPage').click( function() {
 		$('#mainContainer').load('contact.html');
 	});
-	$('#basketPage').click( function() {
-		$('#mainContainer').load('basket.html');
-	});
 	$('#loginPage').click( function() {
 		$('#mainContainer').load('login.html');
 	});
@@ -25,17 +22,48 @@ $(document).ready(function() {
 });
 
 function addItemsToTable(items) {
-    // Get the table body we we can add items to it
-    var tableBody = document.getElementById("itemtablebody");
-    // Remove all contents of the table body (if any exist)
-    tableBody.innerHTML = "";
+    //Get the table body we we can add items to it
+    var tableBody = document.getElementById("itemtablebody");  
+    var thead = document.createElement("thead");
+    var tr2 = document.createElement("tr");
+    
+    var nameHead = document.createElement("th");
+    nameHead.textContent = "NAME";
+    tr2.appendChild(nameHead);
+    
+    var priceHead = document.createElement("th");
+    priceHead.textContent = "PRICE";
+    tr2.appendChild(priceHead);
+    
+    var descriptionHead = document.createElement("th");
+    descriptionHead.textContent = "DESCRIPTION";
+    tr2.appendChild(descriptionHead);
+    
+    var stockHead = document.createElement("th");
+    stockHead.textContent = "STOCK";
+    tr2.appendChild(stockHead);
+    
+    var inCartHead = document.createElement("th");
+    inCartHead.textContent = "IN CART";
+    tr2.appendChild(inCartHead);
+    
+    var emptyHead = document.createElement("th");
+    emptyHead.textContent = " ";
+    tr2.appendChild(emptyHead);
+    
+    var idHead = document.createElement("th");
+    idHead.textContent = "ID";
+    tr2.appendChild(idHead);
+    
+    thead.appendChild(tr2);
+    tableBody.appendChild(thead);
 
     // Loop through the items from the server
     for (var i = 0; i < items.length; i++) {
         var item = items[i];
         // Create a new line for this item
         var tr = document.createElement("tr");
-
+       
         var nameCell = document.createElement("td");
         nameCell.textContent = item.name;
         tr.appendChild(nameCell);
@@ -43,48 +71,29 @@ function addItemsToTable(items) {
         var priceCell = document.createElement("td");
         priceCell.textContent = item.price;
         tr.appendChild(priceCell);
-
+        
+        var descriptionCell = document.createElement("td");
+        descriptionCell.textContent = item.description;
+        tr.appendChild(descriptionCell);
+        
+        var stockCell = document.createElement("td");
+        stockCell.textContent = item.stock;
+        tr.appendChild(stockCell);
+        
+        var inCartCell = document.createElement("td");
+        inCartCell.textContent = "0";
+        tr.appendChild(inCartCell);
+        
+        var addToCartCell = document.createElement("td");
+        var btnAddToCart = document.createElement("button");
+        btnAddToCart.textContent = "Add to Cart";
+        addToCartCell.appendChild(btnAddToCart);
+        tr.appendChild(addToCartCell);
+        
+        var idCell = document.createElement("td");
+        idCell.textContent = item.ID;
+        tr.appendChild(idCell);
+        
         tableBody.appendChild(tr);
     }
 }
-
-//Function from slide AJAX example
-function myfunc()
-{
-	var http;
-	
-	if (!XMLHttpRequest)
-		http = new ActiveXObject("Microsoft.XMLHTTP");
-	else
-		http = new XMLHttpRequest();
-	
-	function sendRequest(httpMethod, url, body, responseHandler) 
-	{
-		http.open(httpMethod, url);
-		http.onreadystatechange = function () 
-			{
-				if (http.readyState == 4 && http.status == 200) 
-					{
-						responseHandler(http.responseText);
-					}
-			};
-			http.send(body);
-	}
-}
-
-//Send a GET request to "/query" without an argument
-sendRequest("GET", "/query", null, function(value) {
-//This code is run when GET data is received
-});
-
-//Include a "q" parameter
-var foo = encodeURIComponent("Mathias");
-sendRequest("GET", "/query?q=" + foo, null, function(value) {
-//This code is run when GET data is received
-});
-
-//Send a POST request with a parameter in request body
-//Use this for updating values on the JAX RS service
-sendRequest("POST", "/query", "q=" + foo, function(value) {
-//...
-});
