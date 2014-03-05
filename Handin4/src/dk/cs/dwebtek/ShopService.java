@@ -7,6 +7,7 @@ import org.jdom2.JDOMException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -18,12 +19,11 @@ public class ShopService {
      * Out Servlet session. We will need this for the shopping basket
      */
     @Context HttpSession session;
-
-    /**
-     * Make the price increase per request (for the sake of example)
-     */
+    public ShopService(@Context HttpServletRequest servletRequest) {
+        session = servletRequest.getSession();
+    }
+    
     private static int priceChange = 0;
-
     @GET
     @Path("items")
     public String getItems() {
@@ -49,7 +49,6 @@ public class ShopService {
         return array.toString();
     }
   
-    
     CloudHandler cloud = new CloudHandler();
     @GET
     @Path("cloudItems")
@@ -58,9 +57,7 @@ public class ShopService {
     	ArrayList<Item> items = cloud.listItems();
     	JSONArray mJSONArray = new JSONArray(items);
     	
-    	//JSONObject jsonObject1 = new JSONObject();
-    	
     	return mJSONArray.toString();
     }
-    
 }
+

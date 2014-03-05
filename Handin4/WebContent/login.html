@@ -1,14 +1,19 @@
 <p></p>
 <h2>Login</h2>
 <section class="loginform cf">  
-<form name="login" action="checkLogin" method="get" accept-charset="utf-8">  
+<form name="login" accept-charset="utf-8">  
     <ul>  
         <li><label for="usermail">Username</label>  
         <input name="usermail" placeholder="username" required></li>  
         <li><label for="password">Password</label>  
         <input id="password" type="password" name="password" placeholder="password" pattern=".{3,20}" title="Minmimum 3 letters or numbers and max 20." required></li>  
         <li>  
-        <input type="submit" value="Login"></li>  
+        <input type="submit" value="Login" id="btnLogin"></li>  
     </ul>  
 </form>  
 </section>  
+<script>
+$('#btnLogin').click( function() {
+		alert("HEJ");
+		});
+</script>

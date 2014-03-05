@@ -43,19 +43,19 @@ public class LoginFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		Object loggedIn = req.getSession().getAttribute("loggedIn");
 			
-//		if(loggedIn == null) {
-//			System.out.println("NOT LOGGED IN");
-//			HttpServletResponse res = (HttpServletResponse) response;
-//			res.sendRedirect("index.jsf");
-//		}
-//		else if ((boolean)loggedIn) {
-//			chain.doFilter(request, response);
-//		} 
-//		else {
-//			HttpServletResponse res = (HttpServletResponse) response;
-//			res.sendRedirect("products.jsf");
-//			System.out.println("NOT VALID USER - NOT ADMIN");
-//		}
+		if(loggedIn == null) {
+			System.out.println("NOT LOGGED IN");
+			HttpServletResponse res = (HttpServletResponse) response;
+			res.sendRedirect("index.html");
+		}
+		else if ((boolean)loggedIn) {
+			chain.doFilter(request, response);
+		} 
+		else {
+			HttpServletResponse res = (HttpServletResponse) response;
+			res.sendRedirect("products.html");
+			System.out.println("NOT VALID USER - NOT ADMIN");
+		}
 	}
 
 	/**
