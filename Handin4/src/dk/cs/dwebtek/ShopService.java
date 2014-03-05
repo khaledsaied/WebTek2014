@@ -52,8 +52,8 @@ public class ShopService {
     
     CloudHandler cloud = new CloudHandler();
     @GET
-    @Path("xmlitems")
-    public String convertXMLtoJSON() throws IOException, JDOMException
+    @Path("cloudItems")
+    public String getItemsFromCloud() throws IOException, JDOMException
     {
     	ArrayList<Item> items = cloud.listItems();
     	JSONArray mJSONArray = new JSONArray(items);

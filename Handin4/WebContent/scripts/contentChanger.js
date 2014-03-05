@@ -4,7 +4,7 @@ $(document).ready(function() {
 	});
 	$('#productsPage').click( function() {
 		$('#mainContainer').load('products.html');
-		$.get('rest/shop/xmlitems', function(itemsText) {
+		$.get('rest/shop/cloudItems', function(itemsText) {
 			var items = JSON.parse(itemsText);
             addItemsToTable(items);
 		});
