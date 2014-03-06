@@ -87,6 +87,10 @@ function addItemsToTable(items) {
         var addToCartCell = document.createElement("td");
         var btnAddToCart = document.createElement("button");
         btnAddToCart.textContent = "Add to Cart";
+        //Tilføjer addItem funktionen
+        btnAddToCart.setAttribute("id", "btnAddToCart");
+        
+        //        
         addToCartCell.appendChild(btnAddToCart);
         tr.appendChild(addToCartCell);
         
@@ -96,6 +100,19 @@ function addItemsToTable(items) {
         
         tableBody.appendChild(tr);
     }
+}
+
+/**
+ * A function that can add event listeners in any browser
+ */
+function addEventListener(myNode, eventType, myHandlerFunc) {
+    if (myNode.addEventListener)
+        myNode.addEventListener(eventType, myHandlerFunc, false);
+    else
+        myNode.attachEvent("on" + eventType,
+            function (event) {
+                myHandlerFunc.call(myNode, event);
+            });
 }
 
 function loadShopURLXMLDoc()
