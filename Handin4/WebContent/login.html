@@ -1,19 +1,35 @@
 <p></p>
 <h2>Login</h2>
+<p id="welcome">Velkommen</p>
 <section class="loginform cf">  
 <form name="login" accept-charset="utf-8">  
     <ul>  
-        <li><label for="usermail">Username</label>  
-        <input name="usermail" placeholder="username" required></li>  
+        <li><label for="username">Username</label>  
+        <input name="username" id="username" placeholder="username" required></li>  
         <li><label for="password">Password</label>  
         <input id="password" type="password" name="password" placeholder="password" pattern=".{3,20}" title="Minmimum 3 letters or numbers and max 20." required></li>  
         <li>  
-        <input type="submit" value="Login" id="btnLogin"></li>  
+        <input type="button" value="Login" id="btnLogin"></li>  
     </ul>  
 </form>  
 </section>  
+<p id="loginStatus">NOT LOGGED IN</p>
 <script>
 $('#btnLogin').click( function() {
-		alert("HEJ");
-		});
+	var username = document.getElementById("username").value;
+	var password = document.getElementById("password").value;
+	$.post('rest/shop/login',"user="+username+"&password="+password, function(itemsText) {		
+		//var loginResponse = JSON.parse(itemsText);
+		loginMessage();
+       	//alert("HEJ2");
+	});
+	if(loggedIn == "yes")
+		$('#mainContainer').load('products.html');
+	//alert("hhh");
+});
+function loginMessage() {
+	 var loginStatus = document.getElementById("loginStatus");  
+	 loginStatus.textContent = "Logged In";
+}
+
 </script>
