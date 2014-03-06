@@ -17,9 +17,17 @@ $(document).ready(function() {
 	});
 	$('#loginPage').click( function() {
 		$('#mainContainer').load('login.html');
+		$.get('rest/shop/loggedIn', function(itemsText) {
+			var name = itemsText;
+			welcomeMessage(name);
+		});
 	});
 
 });
+function welcomeMessage(name) {
+	 var welcome = document.getElementById("welcome");  
+	 welcome.textContent = "Velkommen "+name;
+}
 
 function addItemsToTable(items) {
     //Get the table body we we can add items to it
@@ -86,12 +94,21 @@ function addItemsToTable(items) {
         
         var addToCartCell = document.createElement("td");
         var btnAddToCart = document.createElement("button");
-        btnAddToCart.textContent = "Add to Cart";
-        //Tilføjer addItem funktionen
-        btnAddToCart.setAttribute("id", "btnAddToCart");
-        
-        //        
+        btnAddToCart.textContent = "Add to Cart"; 
         addToCartCell.appendChild(btnAddToCart);
+        addEventListener(btnAddToCart, "click", function () {
+            //Same as above, get the items from the server
+            //sendRequest("POST", "rest/shop/cart", "id="+item.ID+"&stock="+item.stock, function (itemsText) 
+        	//sendRequest("POST", "rest/shop/cart", "id=2869&stock=4245878", function (itemsText)
+        	var body = "";
+        	sendRequest("POST", "rest/shop/cart", body, function (itemsText)	{
+                //This code is called when the server has sent its data
+                //var cartText = JSON.parse(itemsText);
+        		
+            });
+        	alert("ADDDDDD MEE");
+        });
+       
         tr.appendChild(addToCartCell);
         
         var idCell = document.createElement("td");
@@ -99,12 +116,8 @@ function addItemsToTable(items) {
         tr.appendChild(idCell);
         
         tableBody.appendChild(tr);
-    }
 }
-
-/**
- * A function that can add event listeners in any browser
- */
+    
 function addEventListener(myNode, eventType, myHandlerFunc) {
     if (myNode.addEventListener)
         myNode.addEventListener(eventType, myHandlerFunc, false);
@@ -114,6 +127,23 @@ function addEventListener(myNode, eventType, myHandlerFunc) {
                 myHandlerFunc.call(myNode, event);
             });
 }
+
+var http;
+if (navigator.appName == "Microsoft Internet Explorer")
+    http = new ActiveXObject("Microsoft.XMLHTTP");
+else
+    http = new XMLHttpRequest();
+
+function sendRequest(httpMethod, url, body, responseHandler) {
+    http.open(httpMethod, url, true);
+    http.onreadystatechange = function () {
+        if (http.readyState == 4 && http.status == 200) {
+            responseHandler(http.responseText);
+        }
+    };
+    http.send(body);
+}
+
 
 function loadShopURLXMLDoc()
 {
@@ -166,4 +196,5 @@ xmlhttp.onreadystatechange=function()
   };
 xmlhttp.open("GET","http://services.brics.dk/java4/cloud/listCustomers",true);
 xmlhttp.send();
+}
 }
