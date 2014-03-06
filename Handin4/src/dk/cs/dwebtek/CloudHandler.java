@@ -27,7 +27,7 @@ public class CloudHandler {
 	private static Namespace ns = Namespace.getNamespace("http://www.cs.au.dk/dWebTek/2014");
 	private static HttpURLConnection cloudCon;
 	//String validatorPath = "/WEB-INF/Validator"+File.separator+"cloud.xsd";
-	String validatorPath = "/Users/khaledsaied/git/WebTek2014/Handin4/WebContent/WEB-INF/Validator/cloud.xsd";
+	String validatorPath = "/Users/khaledsaied/Gits/WebTek2014/Handin4/WebContent/WEB-INF/Validator/cloud.xsd";
 	//private static String _customerID = null;
 	private static String _itemID = null;
 	//private static String _loginResponse = null;
