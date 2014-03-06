@@ -26,8 +26,8 @@ public class CloudHandler {
 	private static String baseUrl = "http://services.brics.dk/java4/cloud/";
 	private static Namespace ns = Namespace.getNamespace("http://www.cs.au.dk/dWebTek/2014");
 	private static HttpURLConnection cloudCon;
-	String validatorPath = "Validator"+File.separator+"cloud.xsd";
-	//String validatorPath = "/Users/khaledsaied/Dropbox/IKT [6. SEMESTER]/WebTek/MacEclipse/Handin3/WebContent/WEB-INF/Validator/cloud.xsd";
+	//String validatorPath = "/WEB-INF/Validator"+File.separator+"cloud.xsd";
+	String validatorPath = "/Users/khaledsaied/git/WebTek2014/Handin4/WebContent/WEB-INF/Validator/cloud.xsd";
 	//private static String _customerID = null;
 	private static String _itemID = null;
 	//private static String _loginResponse = null;
@@ -195,13 +195,18 @@ public class CloudHandler {
 		e2.setText(password);
 		root.addContent(e2);
 		Document doc = new Document(root);
-		
+		XMLOutputter xmlOutput = new XMLOutputter(Format.getPrettyFormat());
+		System.out.println("LOGIN METODE");
+		xmlOutput.output(doc, System.out);
 		try
 		{
 			Validator.validateXML(doc, Paths.get(validatorPath));
+			System.out.println("efter validate");
+			Document requestDoc = postToCloud(doc,"login");
+			
 			
 			// lav request til server med dokumentet
-			Document requestDoc = postToCloud(doc,"login");
+			
 			try
 			{				
 				Validator.validateXML(requestDoc, Paths.get(validatorPath));
@@ -211,15 +216,23 @@ public class CloudHandler {
 				System.out.println("My login response: " + loginResponse + "\n");	
 				return loginResponse;
 			}
-			catch(Exception e)
-			{
-				System.out.println("The XML document is not valid...");
+			catch(JDOMException e){
+				System.out.println("1 + The XML document is not valid...");
 				return "";
 			}
+			catch(Exception e){
+					System.out.println(e);
+					return "";
+			}
 		}
-		catch(Exception e)
-		{
-			System.out.println("The XML document is not valid...");
+		catch(JDOMException e) {
+			System.out.println("2 + The XML document is not valid...");
+			e.printStackTrace();
+			return "";
+		}
+		catch(Exception e) {
+			//System.out.println(e);
+			e.printStackTrace();
 			return "";
 		}
 	}
