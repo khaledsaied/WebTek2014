@@ -48,7 +48,7 @@ function addItemsToTable(items) {
     tr2.appendChild(descriptionHead);
     
     var stockHead = document.createElement("th");
-    stockHead.textContent = "STOCK";
+    stockHead.textContent = "STOCK";    	
     tr2.appendChild(stockHead);
     
     var inCartHead = document.createElement("th");
@@ -87,11 +87,12 @@ function addItemsToTable(items) {
         tr.appendChild(descriptionCell);
         
         var stockCell = document.createElement("td");
-        stockCell.textContent = item.stock;
+        stockCell.textContent = item.stock;        
         tr.appendChild(stockCell);
         
         var inCartCell = document.createElement("td");
         inCartCell.textContent = "0";
+        inCartCell.setAttribute("ID", item.ID);        
         tr.appendChild(inCartCell);
         
         var addToCartCell = document.createElement("td");
@@ -100,24 +101,12 @@ function addItemsToTable(items) {
         addToCartCell.appendChild(btnAddToCart);
        
         btnAddToCart.addEventListener( "click", function () {
-        	sendRequest("POST", "rest/shop/cart", "id=2869&stock=4245878", function (itemsText) {
+        	sendRequest("POST", "rest/shop/cart", "id="+item.ID+"&stock="+item.stock, function (itemsText) {
                 //This code is called when the server has sent its data
-                alert("item: " + item.ID + "Stock: " + item.stock + "itemsText: " + itemsText);
+        		updateInCart(item.ID, item.stock);
+        		//alert("item: " + item.ID + "Stock: " + item.stock + "itemsText: " + itemsText);
             });
-        });
-        
-        // btnAddToCart.addEventListener( "click", function () {
-            //Same as above, get the items from the server
-            //sendRequest("POST", "rest/shop/cart", "id="+item.ID+"&stock="+item.stock, function (itemsText) 
-        	//sendRequest("POST", "rest/shop/cart", "id=2869&stock=4245878", function (itemsText)
-        	//var body = "";
-        	//sendRequest("POST", "rest/shop/cart", body, function (itemsText)	{
-                //This code is called when the server has sent its data
-                //var cartText = JSON.parse(itemsText);
-        		
-           // });
-        	//alert("item: " + item.ID);
-      //  });
+        });               
        
         tr.appendChild(addToCartCell);
         
@@ -128,6 +117,16 @@ function addItemsToTable(items) {
         tableBody.appendChild(tr);
     	}());
 }
+    function updateInCart(buttonID, itemStock)
+    {
+    	var tdToUpdate = document.getElementById(buttonID);
+    	var counter = tdToUpdate.textContent;
+    	
+    	if(!itemStock <= 0 && itemStock > counter)
+    		counter++;
+    	
+    	tdToUpdate.textContent = counter;
+    }
     
     function addEventListener(myNode, eventType, myHandlerFunc) {
         if (myNode.addEventListener)
