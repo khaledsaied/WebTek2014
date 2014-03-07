@@ -68,6 +68,8 @@ function addItemsToTable(items) {
 
     // Loop through the items from the server
     for (var i = 0; i < items.length; i++) {
+    	(function () {
+
         var item = items[i];
         // Create a new line for this item
         var tr = document.createElement("tr");
@@ -96,18 +98,26 @@ function addItemsToTable(items) {
         var btnAddToCart = document.createElement("button");
         btnAddToCart.textContent = "Add to Cart"; 
         addToCartCell.appendChild(btnAddToCart);
-        addEventListener(btnAddToCart, "click", function () {
+       
+        btnAddToCart.addEventListener( "click", function () {
+        	sendRequest("POST", "rest/shop/cart", "id=2869&stock=4245878", function (itemsText) {
+                //This code is called when the server has sent its data
+                alert("item: " + item.ID + "Stock: " + item.stock + "itemsText: " + itemsText);
+            });
+        });
+        
+        // btnAddToCart.addEventListener( "click", function () {
             //Same as above, get the items from the server
             //sendRequest("POST", "rest/shop/cart", "id="+item.ID+"&stock="+item.stock, function (itemsText) 
         	//sendRequest("POST", "rest/shop/cart", "id=2869&stock=4245878", function (itemsText)
-        	var body = "";
-        	sendRequest("POST", "rest/shop/cart", body, function (itemsText)	{
+        	//var body = "";
+        	//sendRequest("POST", "rest/shop/cart", body, function (itemsText)	{
                 //This code is called when the server has sent its data
                 //var cartText = JSON.parse(itemsText);
         		
-            });
-        	alert("ADDDDDD MEE");
-        });
+           // });
+        	//alert("item: " + item.ID);
+      //  });
        
         tr.appendChild(addToCartCell);
         
@@ -116,6 +126,7 @@ function addItemsToTable(items) {
         tr.appendChild(idCell);
         
         tableBody.appendChild(tr);
+    	}());
 }
     
 function addEventListener(myNode, eventType, myHandlerFunc) {

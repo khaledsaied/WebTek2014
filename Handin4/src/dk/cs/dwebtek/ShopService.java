@@ -22,6 +22,7 @@ public class ShopService {
     /**
      * Out Servlet session. We will need this for the shopping basket
      */
+	
     HttpSession session;
     public ShopService(@Context HttpServletRequest servletRequest) {
         session = servletRequest.getSession();
@@ -73,6 +74,7 @@ public class ShopService {
     	else
     		return "NOT !!!";
     }
+   
     String r; 
     @POST
     @Path("login")
@@ -101,7 +103,6 @@ public class ShopService {
     @POST
     @Path("cart")
     public String addToCart (@FormParam("id") String itemId,@FormParam("stock") int itemStock) {
-    
     	HashMap<String,Integer> cart =	(HashMap<String,Integer>) session.getAttribute("cart"); // = new HashMap();
     	
     	if(cart == null)
@@ -115,13 +116,7 @@ public class ShopService {
     	else {
     		cart.put(itemId, 1);
     	}
-//    	
-//    	if(itemStock > 0)
-//    		
-//    	counter++;
-//    	
-    	
-    	session.setAttribute("cartAttr", cart);
-    	return "http://services.brics.dk/java4/cloud/listItems?shopID=530";
+    		
+    	return "hej";
     }
  }
