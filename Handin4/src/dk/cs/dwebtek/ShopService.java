@@ -22,8 +22,9 @@ public class ShopService {
     /**
      * Out Servlet session. We will need this for the shopping basket
      */
-	
-    HttpSession session;
+	private HashMap<String,Integer> cart =	new HashMap<String,Integer>();
+   
+	HttpSession session;
     public ShopService(@Context HttpServletRequest servletRequest) {
         session = servletRequest.getSession();
     }
@@ -103,20 +104,22 @@ public class ShopService {
     @POST
     @Path("cart")
     public String addToCart (@FormParam("id") String itemId,@FormParam("stock") int itemStock) {
-    	HashMap<String,Integer> cart =	(HashMap<String,Integer>) session.getAttribute("cart"); // = new HashMap();
-    	
-    	if(cart == null)
-    	{
-    		cart = new HashMap<String, Integer>();
-    	}
-  
-    	if (cart.containsKey(itemId)) {
-    		cart.put(itemId, cart.get(itemId)+1);
-    	}
-    	else {
-    		cart.put(itemId, 1);
-    	}
+    
+    	putInCart(itemId);    	
     		
     	return "hej";
+    }
+    
+    
+    public void putInCart(String itemToAdd) 
+    {
+    	if(cart.containsKey(itemToAdd))
+    	{
+    		cart.put(itemToAdd, cart.get(itemToAdd)+1);
+    	}
+    	else
+    	{
+    	cart.put(itemToAdd, 1);
+    	}
     }
  }
