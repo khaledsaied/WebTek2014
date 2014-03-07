@@ -23,7 +23,7 @@ public class ShopService {
      * Out Servlet session. We will need this for the shopping basket
      */
 	//private HashMap<String,Integer> cart; //= new HashMap<String,Integer>();
-   	HttpSession session;
+   	HttpSession session;    
    	
     public ShopService(@Context HttpServletRequest servletRequest) {
         session = servletRequest.getSession();
@@ -107,9 +107,7 @@ public class ShopService {
     @POST
     @Path("cart")
     public String addToCart (@FormParam("id") String itemId,@FormParam("stock") int itemStock) 
-    {
-    	
-    	
+    {    	    	
     	putInCart(itemId);    	
     	System.out.println(session.getAttribute("cart"));
     	

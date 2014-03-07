@@ -3,7 +3,8 @@ $(document).ready(function() {
 		$('#mainContainer').load('home.html');
 	});
 	$('#productsPage').click(function() {
-		$('#mainContainer').load('products.html');
+		$('#mainContainer').load('products.html');	
+		
 		$.get('rest/shop/cloudItems', function(itemsText) {
 			var items = JSON.parse(itemsText);
 			document.getElementsByName("buy").disabled = true;
@@ -26,7 +27,7 @@ $(document).ready(function() {
 	
 });
 	
-	
+var priceTotal = 0;
 
 function welcomeMessage(name) {
 	var welcome = document.getElementById("welcome");
@@ -123,9 +124,10 @@ function addItemsToTable(items) {
 			btnAddToCart.addEventListener("click", function() {
 				sendRequest("POST", "rest/shop/cart", "id=" + item.ID
 						+ "&stock=" + item.stock, function(itemsText) {
-					// This code is called when the server has sent its data
-					updateInCart(item.ID, item.stock);
-					 alert("item: " + item.ID + "Stock: " + item.stock + "itemsText: " + itemsText);
+					// This code is called when the server has sent its data													
+					priceTotal = priceTotal + parseInt(item.price);						
+					document.getElementById("totalPrice").innerHTML = priceTotal;
+					updateInCart(item.ID, item.stock);															
 				});
 			});
 
@@ -139,16 +141,16 @@ function addItemsToTable(items) {
 								
 		}());
 	}
-
-	
-	
+		
 	function updateInCart(buttonID, itemStock) {
 		var tdToUpdate = document.getElementById(buttonID);
 		var counter = tdToUpdate.textContent;
-
+		
 		if (!itemStock <= 0 && itemStock > counter)
-			counter++;
-
+			{
+				counter++;				
+			}
+		
 		tdToUpdate.textContent = counter;
 
 	}
