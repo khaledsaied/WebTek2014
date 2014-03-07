@@ -106,12 +106,25 @@ public class ShopService {
     public String addToCart (@FormParam("id") String itemId,@FormParam("stock") int itemStock) 
     {
     
+    	
     	putInCart(itemId);    	
     	
     	
     	return "hej";
     }
     
+    @POST
+    @Path("adjustCloud")
+    public void AdjustCloud (@FormParam("id") String itemId,@FormParam("stock") int itemStock) 
+    {
+    	//Skal være logged in
+    	//Set alle inCart = 0;
+    	//Adjust itemstock på cloud
+    	//foreach(items)
+    	//	cloud.adjustItemStock(adjustment, ); for item.ID
+    	//cloud.adjustItemStock(finalAmountStock);
+    	
+    }
     
     public void putInCart(String itemToAdd) 
     {
