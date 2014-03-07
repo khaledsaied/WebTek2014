@@ -29,32 +29,6 @@ public class ShopService {
         session = servletRequest.getSession();                
         System.out.println("Is not connected to session = " + session.isNew());
     }
-    
-    private static int priceChange = 0;
-    @GET
-    @Path("items")
-    public String getItems() {
-        //You should get the items from the cloud server.
-        //In the template we just construct some simple data as an array of objects
-        JSONArray array = new JSONArray();
-
-        JSONObject jsonObject1 = new JSONObject();
-        jsonObject1.put("id", 1);
-        jsonObject1.put("name", "Stetson hat");
-        jsonObject1.put("price", 200 + priceChange);
-        array.put(jsonObject1);
-
-        JSONObject jsonObject2 = new JSONObject();
-        jsonObject2.put("id", 2);
-        jsonObject2.put("name", "Rifle");
-        jsonObject2.put("price", 500 + priceChange);
-        array.put(jsonObject2);
-
-        priceChange++;
-
-        //You can create a MessageBodyWriter so you don't have to call toString() every time
-        return array.toString();
-    }
   
     CloudHandler cloud = new CloudHandler();
     @GET
@@ -66,37 +40,69 @@ public class ShopService {
     	
     	return mJSONArray.toString();
     }
+    
     @GET
     @Path("loggedIn")
     public String loggedIn()
-    {	
-    	if(session.getAttribute("loginSession") != null)
-    		
-    		return session.getAttribute("loginSession").toString();
-    	else
-    		return "But not logged in";
+    { 
+     if(session.getAttribute("loginSession") != null)
+      
+      return session.getAttribute("loginSession").toString();
+     else
+      return "User is not signed in";
     }
     
-   
+    @GET
+    @Path("loggedInBool")
+    public boolean loggedInBool()
+    { 
+     if(session.getAttribute("loginSession") != null)
+     {
+      System.out.println("LoggedInBool: true");
+      return true;
+     }
+     else
+     {
+      System.out.println("LoggedInBool: false");
+      return false;
+     }
+    }
+    
     String r; 
     @POST
     @Path("login")
-    public Response login(@FormParam("user") String user, @FormParam("password") String password) throws IOException, JDOMException { 
+    public String login(@FormParam("user") String user, @FormParam("password") String password) { 
 
-		r = cloud.login(user, password);
-		
-		if (cloud.responseCode == 200)	{
-			System.out.println("login Success");
-			session.setAttribute("loginSession", user);
-		}
-		else {
-			System.out.println("UNVALID USER?? RESPONSECODE: " + cloud.responseCode);
-		}	
-    		
-    	return Response.status(cloud.responseCode)
-    			.entity("Logged in as: " + r)
-    			.build();    			
+     
+  try {
+   r = cloud.login(user, password);
+  } catch (IOException | JDOMException e) {
+   // TODO Auto-generated catch block
+   e.printStackTrace(); 
+   return "fail";
+  }
+  
+  if (cloud.responseCode == 200) {
+   System.out.println("LOGIN SUCCESS!!!!!!!!");
+   session.setAttribute("loginSession", user);
+   return "success";
+  }
+  else {
+   System.out.println("UNVALID USER?? RESPONSECODE: " + cloud.responseCode);
+   
+   return "fail";
+  } 
+
     }
+    @POST
+ @Path("logout")
+ public void logout() {
+     System.out.println("Session before logout:");
+     //session.invalidate();
+     session.setAttribute("loginSession", null);
+     //session.removeAttribute("loginSession"); //.setAttribute("loginSession", null);
+  System.out.println("Session after logout:");
+ }
         
     @POST
     @Path("cart")
@@ -111,9 +117,7 @@ public class ShopService {
     @POST
     @Path("adjustCloud")
     public boolean adjustCloud (@FormParam("id") String itemId,@FormParam("stock") int itemStock) 
-    {
-    	
-    	
+    {    	    	
     	//Get "CartMap" attribute in Session
     	
     	//Sell items on cloud based upon the amount of each itemID: cloud.adjustItemStock(finalAmountStock);

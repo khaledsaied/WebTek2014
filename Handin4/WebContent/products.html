@@ -5,6 +5,17 @@
 <div>
 <span>Total price for items in cart: </span>
 <span id="totalPrice">0</span>
-<input id="buy" type="button" onclick="buy()" value="BUY">
+<button name="buy" id="btnBuy" onclick="buy()" >BUY</button>
 </div>
-
+<script type="text/javascript">
+$(document).ready(function() {
+ $.get('rest/shop/loggedInBool', function(loggedInResponse) {
+  if(loggedInResponse == "true") {
+    $('#btnBuy').attr("disabled", false); // enable buy button   
+   }
+  else {
+   $('#btnBuy').attr("disabled", true); // disable buy button
+  }
+ });
+});
+</script>
