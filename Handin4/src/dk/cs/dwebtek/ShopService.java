@@ -22,11 +22,14 @@ public class ShopService {
     /**
      * Out Servlet session. We will need this for the shopping basket
      */
-	private HashMap<String,Integer> cart =	new HashMap<String,Integer>();
+	//private HashMap<String,Integer> cart; //= new HashMap<String,Integer>();
    	HttpSession session;
    	
     public ShopService(@Context HttpServletRequest servletRequest) {
         session = servletRequest.getSession();
+        //cart.put("itemID", 1);
+        //session.setAttribute("cartMap", cart);
+        System.out.println("Is not connected to session = " + session.isNew());
     }
     
     private static int priceChange = 0;
@@ -105,10 +108,10 @@ public class ShopService {
     @Path("cart")
     public String addToCart (@FormParam("id") String itemId,@FormParam("stock") int itemStock) 
     {
-    
+    	
     	
     	putInCart(itemId);    	
-    	
+    	System.out.println(session.getAttribute("cart"));
     	
     	return "hej";
     }
@@ -117,29 +120,49 @@ public class ShopService {
     @Path("adjustCloud")
     public void AdjustCloud (@FormParam("id") String itemId,@FormParam("stock") int itemStock) 
     {
-    	//Skal være logged in
-    	//Set alle inCart = 0;
-    	//Adjust itemstock på cloud
+    	//se hvilke items der er i session "CartMap"
+    	//Skal være logged in 
+    	//if(session is true)
+    	//{
+    	// User can click buy , tell user that purchase succeeded
+    	//Set all inCartCell = 0;
+    	//Adjust itemstock on the cloud
     	//foreach(items)
     	//	cloud.adjustItemStock(adjustment, ); for item.ID
     	//cloud.adjustItemStock(finalAmountStock);
+    	//}
+    	//else
+    	//{
+    	//Tell user that purchase failed
+    	//}
+    	//
     	
     }
     
+    
+    @POST
+    @Path("putInCart")
     public void putInCart(String itemToAdd) 
-    {
-    	//HashMap<String,Integer> cartSession = (HashMap<String,Integer>) session.getAttribute("cartSession"); // = new HashMap();
-    	
+    {       
+    	HashMap<String,Integer> cart = (HashMap<String,Integer>) session.getAttribute("cartMap"); // = new HashMap();
+    	    	
+    	if(cart == null)
+        {
+         cart = new HashMap<String, Integer>();
+        }
     	
     	if(cart.containsKey(itemToAdd))
     	{
+    		System.out.println("itemAdd exists "+cart.get(itemToAdd));
     		cart.put(itemToAdd, cart.get(itemToAdd)+1);
     	}
     	else
     	{
-    	cart.put(itemToAdd, 1);
+    		System.out.println("item created "+cart.get(itemToAdd));
+    		cart.put(itemToAdd, 1);
     	}
-    	
-    	//session.setAttribute("cartAttr", cart);
+    	    	    	
+    	session.setAttribute("cartMap", cart);
+    	System.out.println("CART2:" + session.getAttribute("cartMap"));
     }
  }
