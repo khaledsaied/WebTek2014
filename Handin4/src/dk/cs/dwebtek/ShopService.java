@@ -114,8 +114,14 @@ public class ShopService {
     {
     	
     	
-    	//se hvilke items der er i session "CartMap"
-    	//Skal v�re logged in 
+    	//Get "CartMap" attribute in Session
+    	
+    	//Sell items on cloud based upon the amount of each itemID: cloud.adjustItemStock(finalAmountStock);
+    	
+    	//Set all cells in table to 0 with the same itemID as the ones in HahMap, CartMap.
+    	
+    	//Set innerHTML in <span id="totalPrise"> to 0
+    	
     	//if(session is true)
     	//{
     	// User can click buy , tell user that purchase succeeded
