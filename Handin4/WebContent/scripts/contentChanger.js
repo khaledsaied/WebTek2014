@@ -23,8 +23,7 @@ $(document).ready(function() {
 			var name = itemsText;
 			welcomeMessage(name);
 		});
-	});
-	
+	});	
 });
 	
 var priceTotal = 0;
@@ -71,22 +70,6 @@ function addItemsToTable(items) {
 	thead.appendChild(tr2);
 	tableBody.appendChild(thead);
 	
-	
-	//var btnAddToCart = document.createElement("button");
-	//var btnBuy = document.getElementsByName("buy");
-	
-//	btnAddToCart.textContent = "Add to Cart";
-//	addToCartCell.appendChild(btnAddToCart);
-//
-//	btnAddToCart.addEventListener("click", function() {
-//		sendRequest("POST", "rest/shop/cart", "id=" + item.ID
-//				+ "&stock=" + item.stock, function(itemsText) {
-//			// This code is called when the server has sent its data
-//			updateInCart(item.ID, item.stock);
-//			 alert("item: " + item.ID + "Stock: " + item.stock + "itemsText: " + itemsText);
-//		});
-//	});
-	
 	// Loop through the items from the server
 	for (var i = 0; i < items.length; i++) {
 		(function() {
@@ -124,9 +107,11 @@ function addItemsToTable(items) {
 			btnAddToCart.addEventListener("click", function() {
 				sendRequest("POST", "rest/shop/cart", "id=" + item.ID
 						+ "&stock=" + item.stock, function(itemsText) {
-					// This code is called when the server has sent its data													
+					
+					//Opdater totalprisen for alle varene
 					priceTotal = priceTotal + parseInt(item.price);						
 					document.getElementById("totalPrice").innerHTML = priceTotal;
+					// This code is called when the server has sent its data
 					updateInCart(item.ID, item.stock);															
 				});
 			});
@@ -152,7 +137,6 @@ function addItemsToTable(items) {
 			}
 		
 		tdToUpdate.textContent = counter;
-
 	}
 
 	function userCanBuy(isLoggedIn) {
@@ -193,5 +177,4 @@ function addItemsToTable(items) {
 		};
 		http.send(body);
 	}
-
 }

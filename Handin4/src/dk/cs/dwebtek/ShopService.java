@@ -22,13 +22,11 @@ public class ShopService {
     /**
      * Out Servlet session. We will need this for the shopping basket
      */
-	//private HashMap<String,Integer> cart; //= new HashMap<String,Integer>();
+	
    	HttpSession session;    
    	
     public ShopService(@Context HttpServletRequest servletRequest) {
-        session = servletRequest.getSession();
-        //cart.put("itemID", 1);
-        //session.setAttribute("cartMap", cart);
+        session = servletRequest.getSession();                
         System.out.println("Is not connected to session = " + session.isNew());
     }
     
@@ -76,7 +74,7 @@ public class ShopService {
     		
     		return session.getAttribute("loginSession").toString();
     	else
-    		return "NOT !!!";
+    		return "But not logged in";
     }
    
     String r; 
@@ -87,23 +85,18 @@ public class ShopService {
 		r = cloud.login(user, password);
 		
 		if (cloud.responseCode == 200)	{
-			System.out.println("LOGIN SUCCESS!!!!!!!!");
+			System.out.println("login Success");
 			session.setAttribute("loginSession", user);
 		}
 		else {
 			System.out.println("UNVALID USER?? RESPONSECODE: " + cloud.responseCode);
 		}	
-    		//String username = "perle";
-    		/*if (session.getAttribute(user) != null) {
-    			username = (String) session.getAttribute("username");
-    			}*/
+    		
     	return Response.status(cloud.responseCode)
-    			.entity("Logget ind som: " + r)
-    			.build();
-    			
+    			.entity("Logged in as: " + r)
+    			.build();    			
     }
-    
-    int counter = 0;
+        
     @POST
     @Path("cart")
     public String addToCart (@FormParam("id") String itemId,@FormParam("stock") int itemStock) 
@@ -146,18 +139,15 @@ public class ShopService {
     	{
     		System.out.println("You can't press buy");
     		System.out.println("User: " + session.getAttribute("loginSession").toString());
-    		return false;
-    		//return "NOT !!!";
-    	}
-    	
-    	//return true;
+    		return false;    		
+    	}    	    
     }       
         
     @POST
     @Path("putInCart")
     public void putInCart(String itemToAdd) 
-    {       
-    	HashMap<String,Integer> cart = (HashMap<String,Integer>) session.getAttribute("cartMap"); // = new HashMap();
+    {           	
+    	HashMap<String,Integer> cart = (HashMap<String,Integer>) session.getAttribute("cartMap"); 
     	    	
     	if(cart == null)
         {
@@ -166,16 +156,15 @@ public class ShopService {
     	
     	if(cart.containsKey(itemToAdd))
     	{
-    		System.out.println("itemAdd exists "+cart.get(itemToAdd));
+    		System.out.println("itemToAdd exists and is: "+cart.get(itemToAdd));
     		cart.put(itemToAdd, cart.get(itemToAdd)+1);
     	}
     	else
     	{
-    		System.out.println("item created "+cart.get(itemToAdd));
+    		System.out.println("itemToAdd is created and is: "+cart.get(itemToAdd));
     		cart.put(itemToAdd, 1);
     	}
     	    	    	
-    	session.setAttribute("cartMap", cart);
-    	System.out.println("CART2:" + session.getAttribute("cartMap"));
+    	session.setAttribute("cartMap", cart);    	
     }
  }
