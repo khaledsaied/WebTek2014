@@ -3,13 +3,11 @@ $(document).ready(function() {
 		$('#mainContainer').load('home.html');
 	});
 	$('#productsPage').click(function() {
-		$('#mainContainer').load('products.html');	
-		
+		$('#mainContainer').load('products.html');
 		$.get('rest/shop/cloudItems', function(itemsText) {
 			var items = JSON.parse(itemsText);
-			document.getElementsByName("buy").disabled = true;
-			addItemsToTable(items);			
-		});		
+			addItemsToTable(items);
+		});
 	});
 	$('#aboutPage').click(function() {
 		$('#mainContainer').load('about.html');
@@ -19,13 +17,16 @@ $(document).ready(function() {
 	});
 	$('#loginPage').click(function() {
 		$('#mainContainer').load('login.html');
-		$.get('rest/shop/loggedIn', function(itemsText) {
-			var name = itemsText;
-			welcomeMessage(name);
+		$.get('rest/shop/loggedInBool', function(logInResponse) {
+			if (logInResponse == "true") {
+				$('#mainContainer').load('logout.html');
+			} else {
+				$('#mainContainer').load('login.html');
+			}
 		});
-	});	
+	});
 });
-	
+
 var priceTotal = 0;
 
 function welcomeMessage(name) {
@@ -69,7 +70,7 @@ function addItemsToTable(items) {
 
 	thead.appendChild(tr2);
 	tableBody.appendChild(thead);
-	
+
 	// Loop through the items from the server
 	for (var i = 0; i < items.length; i++) {
 		(function() {
@@ -104,17 +105,28 @@ function addItemsToTable(items) {
 			btnAddToCart.textContent = "Add to Cart";
 			addToCartCell.appendChild(btnAddToCart);
 
-			btnAddToCart.addEventListener("click", function() {
-				sendRequest("POST", "rest/shop/cart", "id=" + item.ID
-						+ "&stock=" + item.stock, function(itemsText) {
-					
-					//Opdater totalprisen for alle varene
-					priceTotal = priceTotal + parseInt(item.price);						
-					document.getElementById("totalPrice").innerHTML = priceTotal;
-					// This code is called when the server has sent its data
-					updateInCart(item.ID, item.stock);															
-				});
-			});
+			btnAddToCart
+					.addEventListener(
+							"click",
+							function() {
+								sendRequest(
+										"POST",
+										"rest/shop/cart",
+										"id=" + item.ID + "&stock="
+												+ item.stock,
+										function(itemsText) {
+
+											// Opdater totalprisen for alle
+											// varene
+											priceTotal = priceTotal
+													+ parseInt(item.price);
+											document
+													.getElementById("totalPrice").innerHTML = priceTotal;
+											// This code is called when the
+											// server has sent its data
+											updateInCart(item.ID, item.stock);
+										});
+							});
 
 			tr.appendChild(addToCartCell);
 
@@ -123,21 +135,18 @@ function addItemsToTable(items) {
 			tr.appendChild(idCell);
 
 			tableBody.appendChild(tr);
-								
+
 		}());
 	}
-	
-	
-	
+
 	function updateInCart(buttonID, itemStock) {
 		var tdToUpdate = document.getElementById(buttonID);
 		var counter = tdToUpdate.textContent;
-		
-		if (!itemStock <= 0 && itemStock > counter)
-			{
-				counter++;				
-			}
-		
+
+		if (!itemStock <= 0 && itemStock > counter) {
+			counter++;
+		}
+
 		tdToUpdate.textContent = counter;
 	}
 
@@ -151,17 +160,18 @@ function addItemsToTable(items) {
 		}
 	}
 
-	
 }
 
-function buy()
-{
-	//Tell adjustCloud(itemId, itemstock) to delete the items in the hashmap in the session
-	document.getElementById("buy").addEventListener("click", function() {
-		sendRequest("POST", "rest/shop/adjustCloud", "id=" + item.ID
-				+ "&stock=" + item.stock, function(itemsText) {																			
-		});
-	});
+function buy() {
+	// Tell adjustCloud(itemId, itemstock) to delete the items in the hashmap in
+	// the session
+	document.getElementById("buy").addEventListener(
+			"click",
+			function() {
+				sendRequest("POST", "rest/shop/adjustCloud", "id=" + item.ID
+						+ "&stock=" + item.stock, function(itemsText) {
+				});
+			});
 }
 
 function addEventListener(myNode, eventType, myHandlerFunc) {
