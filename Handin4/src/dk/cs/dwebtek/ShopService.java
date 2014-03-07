@@ -115,11 +115,12 @@ public class ShopService {
     	
     	return "hej";
     }
-    
+
     @POST
     @Path("adjustCloud")
-    public void AdjustCloud (@FormParam("id") String itemId,@FormParam("stock") int itemStock) 
+    public boolean adjustCloud (@FormParam("id") String itemId,@FormParam("stock") int itemStock) 
     {
+    	
     	//se hvilke items der er i session "CartMap"
     	//Skal v�re logged in 
     	//if(session is true)
@@ -138,18 +139,22 @@ public class ShopService {
     	//
     	if(session.getAttribute("loginSession") != null)
     	{
-    		
+    		System.out.println("You can press buy");
+    		System.out.println("User: " + session.getAttribute("loginSession").toString());
+    		return true;
     		//return session.getAttribute("loginSession").toString();
     	}
     	else
     	{
+    		System.out.println("You can't press buy");
+    		System.out.println("User: " + session.getAttribute("loginSession").toString());
+    		return false;
     		//return "NOT !!!";
     	}
     	
-    	
-    }
-    
-    
+    	//return true;
+    }       
+        
     @POST
     @Path("putInCart")
     public void putInCart(String itemToAdd) 

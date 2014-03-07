@@ -6,8 +6,9 @@ $(document).ready(function() {
 		$('#mainContainer').load('products.html');
 		$.get('rest/shop/cloudItems', function(itemsText) {
 			var items = JSON.parse(itemsText);
-			addItemsToTable(items);
-		});
+			document.getElementsByName("buy").disabled = true;
+			addItemsToTable(items);			
+		});		
 	});
 	$('#aboutPage').click(function() {
 		$('#mainContainer').load('about.html');
@@ -22,11 +23,11 @@ $(document).ready(function() {
 			welcomeMessage(name);
 		});
 	});
-	$('#buy').click(function() {
-		;
-	});
-
+	
 });
+	
+	
+
 function welcomeMessage(name) {
 	var welcome = document.getElementById("welcome");
 	welcome.textContent = "Velkommen " + name;
@@ -68,7 +69,23 @@ function addItemsToTable(items) {
 
 	thead.appendChild(tr2);
 	tableBody.appendChild(thead);
-
+	
+	
+	//var btnAddToCart = document.createElement("button");
+	//var btnBuy = document.getElementsByName("buy");
+	
+//	btnAddToCart.textContent = "Add to Cart";
+//	addToCartCell.appendChild(btnAddToCart);
+//
+//	btnAddToCart.addEventListener("click", function() {
+//		sendRequest("POST", "rest/shop/cart", "id=" + item.ID
+//				+ "&stock=" + item.stock, function(itemsText) {
+//			// This code is called when the server has sent its data
+//			updateInCart(item.ID, item.stock);
+//			 alert("item: " + item.ID + "Stock: " + item.stock + "itemsText: " + itemsText);
+//		});
+//	});
+	
 	// Loop through the items from the server
 	for (var i = 0; i < items.length; i++) {
 		(function() {
@@ -108,8 +125,7 @@ function addItemsToTable(items) {
 						+ "&stock=" + item.stock, function(itemsText) {
 					// This code is called when the server has sent its data
 					updateInCart(item.ID, item.stock);
-					// alert("item: " + item.ID + "Stock: " + item.stock +
-					// "itemsText: " + itemsText);
+					 alert("item: " + item.ID + "Stock: " + item.stock + "itemsText: " + itemsText);
 				});
 			});
 
@@ -120,9 +136,12 @@ function addItemsToTable(items) {
 			tr.appendChild(idCell);
 
 			tableBody.appendChild(tr);
+								
 		}());
 	}
 
+	
+	
 	function updateInCart(buttonID, itemStock) {
 		var tdToUpdate = document.getElementById(buttonID);
 		var counter = tdToUpdate.textContent;
@@ -132,6 +151,16 @@ function addItemsToTable(items) {
 
 		tdToUpdate.textContent = counter;
 
+	}
+
+	function userCanBuy(isLoggedIn) {
+		var buyBtn = document.getElementById("buy");
+
+		if (isLoggedIn == true) {
+			buyBtn.disabled = false;
+		} else {
+			buyBtn.disabled = true;
+		}
 	}
 
 	function addEventListener(myNode, eventType, myHandlerFunc) {
