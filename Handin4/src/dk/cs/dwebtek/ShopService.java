@@ -72,9 +72,9 @@ public class ShopService {
     @Path("loggedIn")
     public String loggedIn()
     {	
-    	if(session.getAttribute("userAttr") != null)
+    	if(session.getAttribute("loginSession") != null)
     		
-    		return session.getAttribute("userAttr").toString();
+    		return session.getAttribute("loginSession").toString();
     	else
     		return "NOT !!!";
     }
@@ -88,7 +88,7 @@ public class ShopService {
 		
 		if (cloud.responseCode == 200)	{
 			System.out.println("LOGIN SUCCESS!!!!!!!!");
-			session.setAttribute("userAttr", user);
+			session.setAttribute("loginSession", user);
 		}
 		else {
 			System.out.println("UNVALID USER?? RESPONSECODE: " + cloud.responseCode);
@@ -121,7 +121,7 @@ public class ShopService {
     public void AdjustCloud (@FormParam("id") String itemId,@FormParam("stock") int itemStock) 
     {
     	//se hvilke items der er i session "CartMap"
-    	//Skal være logged in 
+    	//Skal vï¿½re logged in 
     	//if(session is true)
     	//{
     	// User can click buy , tell user that purchase succeeded
@@ -136,6 +136,16 @@ public class ShopService {
     	//Tell user that purchase failed
     	//}
     	//
+    	if(session.getAttribute("loginSession") != null)
+    	{
+    		
+    		//return session.getAttribute("loginSession").toString();
+    	}
+    	else
+    	{
+    		//return "NOT !!!";
+    	}
+    	
     	
     }
     
