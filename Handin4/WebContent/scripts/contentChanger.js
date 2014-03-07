@@ -126,7 +126,9 @@ function addItemsToTable(items) {
 								
 		}());
 	}
-		
+	
+	
+	
 	function updateInCart(buttonID, itemStock) {
 		var tdToUpdate = document.getElementById(buttonID);
 		var counter = tdToUpdate.textContent;
@@ -149,32 +151,44 @@ function addItemsToTable(items) {
 		}
 	}
 
-	function addEventListener(myNode, eventType, myHandlerFunc) {
-		if (myNode.addEventListener)
-			myNode.addEventListener(eventType, myHandlerFunc, false);
-		else
-			myNode.attachEvent("on" + eventType, function(event) {
-				myHandlerFunc.call(myNode, event);
-			});
-	}
+	
+}
 
-	var http;
-	if (!XMLHttpRequest)
-		http = new ActiveXObject("Microsoft.XMLHTTP");
+function buy()
+{
+	//Tell adjustCloud(itemId, itemstock) to delete the items in the hashmap in the session
+	document.getElementById("buy").addEventListener("click", function() {
+		sendRequest("POST", "rest/shop/adjustCloud", "id=" + item.ID
+				+ "&stock=" + item.stock, function(itemsText) {																			
+		});
+	});
+}
+
+function addEventListener(myNode, eventType, myHandlerFunc) {
+	if (myNode.addEventListener)
+		myNode.addEventListener(eventType, myHandlerFunc, false);
 	else
-		http = new XMLHttpRequest();
+		myNode.attachEvent("on" + eventType, function(event) {
+			myHandlerFunc.call(myNode, event);
+		});
+}
 
-	function sendRequest(httpMethod, url, body, responseHandler) {
-		http.open(httpMethod, url);
-		if (httpMethod == "POST") {
-			http.setRequestHeader("Content-Type",
-					"application/x-www-form-urlencoded");
-		}
-		http.onreadystatechange = function() {
-			if (http.readyState == 4 && http.status == 200) {
-				responseHandler(http.responseText);
-			}
-		};
-		http.send(body);
+var http;
+if (!XMLHttpRequest)
+	http = new ActiveXObject("Microsoft.XMLHTTP");
+else
+	http = new XMLHttpRequest();
+
+function sendRequest(httpMethod, url, body, responseHandler) {
+	http.open(httpMethod, url);
+	if (httpMethod == "POST") {
+		http.setRequestHeader("Content-Type",
+				"application/x-www-form-urlencoded");
 	}
+	http.onreadystatechange = function() {
+		if (http.readyState == 4 && http.status == 200) {
+			responseHandler(http.responseText);
+		}
+	};
+	http.send(body);
 }

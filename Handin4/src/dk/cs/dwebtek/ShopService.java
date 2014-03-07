@@ -76,6 +76,7 @@ public class ShopService {
     	else
     		return "But not logged in";
     }
+    
    
     String r; 
     @POST
@@ -112,6 +113,7 @@ public class ShopService {
     public boolean adjustCloud (@FormParam("id") String itemId,@FormParam("stock") int itemStock) 
     {
     	
+    	
     	//se hvilke items der er i session "CartMap"
     	//Skal v�re logged in 
     	//if(session is true)
@@ -130,14 +132,14 @@ public class ShopService {
     	//
     	if(session.getAttribute("loginSession") != null)
     	{
-    		System.out.println("You can press buy");
+    		
     		System.out.println("User: " + session.getAttribute("loginSession").toString());
     		return true;
     		//return session.getAttribute("loginSession").toString();
     	}
     	else
     	{
-    		System.out.println("You can't press buy");
+    		
     		System.out.println("User: " + session.getAttribute("loginSession").toString());
     		return false;    		
     	}    	    
