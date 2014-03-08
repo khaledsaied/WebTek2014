@@ -1,0 +1,20 @@
+<p></p>
+<h2>Log Out</h2>
+<p id="welcome">Log Out Here</p>
+<section class="loginform cf">
+	<form name="login" accept-charset="utf-8">
+		<ul>
+			<input type="button" value="Log out" id="btnLogOut">
+		</ul>
+	</form>
+</section>
+
+<script>
+	$('#btnLogOut').click(function() {
+		$.post('rest/shop/logout', null, function(itemsText) {
+		});
+		setTimeout(function() {
+			location.reload();
+		}, 1000);
+	});
+</script>
