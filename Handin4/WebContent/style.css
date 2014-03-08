@@ -84,12 +84,13 @@ Basket styling
     cursor:pointer;
 }
 .panel {
-	background: #d0e4fe;
+	background: #FFFFFF;
+	border-left: black solid 2px;
+	border-right: black solid 2px;
     background-size:90% 90%;
     height:300px;
 	display:none;
     font-family:garamond,times-new-roman,serif;
-    border: thin black;
 }
 .panel p{
     text-align:center;
@@ -102,7 +103,7 @@ Basket styling
 .pull-me {
 	display:block;
     position:relative;
-    right:-25px;
+
     width:150px;
     height:20px;
 	font-family:arial,sans-serif;
