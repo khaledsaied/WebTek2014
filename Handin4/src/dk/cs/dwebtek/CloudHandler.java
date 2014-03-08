@@ -26,7 +26,7 @@ public class CloudHandler {
 	private static String baseUrl = "http://services.brics.dk/java4/cloud/";
 	private static Namespace ns = Namespace.getNamespace("http://www.cs.au.dk/dWebTek/2014");
 	private static HttpURLConnection cloudCon;
-	String validatorPath = "Validator"+File.separator+"cloud.xsd";
+	//String validatorPath = "Validator"+File.separator+"cloud.xsd";
 	//String validatorPath = "/Users/Dan/Dropbox/6. Semester/Programs/WebTek2014/Handin4/WebContent/Validator/cloud.xsd";
 	//private static String _customerID = null;
 	private static String _itemID = null;
@@ -44,21 +44,13 @@ public class CloudHandler {
 		root.addContent(e2);
 		
 		Document doc = new Document(root);
-		try
-		{
-			Validator.validateXML(doc, Paths.get(validatorPath));
-			// lav request til server med dokumentet
-			Document requestDoc = postToCloud(doc,"createItem");
-			
-			// laes response og tag itemId ud
-			_itemID = requestDoc.getRootElement().getText();
-			System.out.println("My current itemID: " + _itemID + "\n");
-		}
-		catch(Exception e)
-		{
-			System.out.println("The XML document is not valid...");
-			return;
-		}
+
+		// lav request til server med dokumentet
+		Document requestDoc = postToCloud(doc,"createItem");
+		
+		// laes response og tag itemId ud
+		_itemID = requestDoc.getRootElement().getText();
+		System.out.println("My current itemID: " + _itemID + "\n");
 	}
 	public void modifyItem(Item item) throws IOException, JDOMException {		
 		Element root = new Element("modifyItem", ns);
@@ -82,17 +74,8 @@ public class CloudHandler {
 		root.addContent(e6);
 	
 		Document doc = new Document(root);
-		try
-		{
-			Validator.validateXML(doc, Paths.get(validatorPath));
-			// brug itemId til at lave modifyItem xml
-			postToCloud(doc, "modifyItem");
-		}
-		catch(Exception e)
-		{
-			System.out.println("The XML document is not valid in modifyItem...");
-			return;
-		}
+		
+		postToCloud(doc, "modifyItem");
 	}
 	public void createCustomer(String customerName, String customerPass) throws IOException, JDOMException {
 		// Opret dokument
@@ -108,21 +91,12 @@ public class CloudHandler {
 		root.addContent(e3);
 		
 		Document doc = new Document(root);
-		
-		try
-		{
-			Validator.validateXML(doc, Paths.get(validatorPath));
-			// lav request til server med dokumentet
-			Document requestDoc = postToCloud(doc,"createCustomer");
-			// laes response og tag itemId ud
-			String createCustomerResponse = requestDoc.getRootElement().getText();
-			System.out.println("My current Customer Response: " + createCustomerResponse + "\n");
-		}
-		catch(Exception e)
-		{
-			System.out.println("The XML document is not valid...");
-			return;
-		}
+
+		// lav request til server med dokumentet
+		Document requestDoc = postToCloud(doc,"createCustomer");
+		// laes response og tag itemId ud
+		String createCustomerResponse = requestDoc.getRootElement().getText();
+		System.out.println("My current Customer Response: " + createCustomerResponse + "\n");
 	}
 	
 	public void sellItems(int itemID, int customerID, int saleAmount) throws IOException, JDOMException {
@@ -143,22 +117,14 @@ public class CloudHandler {
 		root.addContent(e4);
 		doc.setRootElement(root);
 		
-		try
-		{
-			Validator.validateXML(doc, Paths.get(validatorPath));
-			// lav request til server med dokumentet
-			Document requestDoc = postToCloud(doc,"sellItems");
-			
-			// laes respons
-			String saleResponse = requestDoc.getRootElement().getText();
-			System.out.println("My login response: " + saleResponse + "\n");
-		}
-		catch(Exception e)
-		{
-			System.out.println("The XML document is not valid...");
-			return;
-		}
+		// lav request til server med dokumentet
+		Document requestDoc = postToCloud(doc,"sellItems");
+		
+		// laes respons
+		String saleResponse = requestDoc.getRootElement().getText();
+		System.out.println("My login response: " + saleResponse + "\n");
 	}
+	
 	public void adjustItemStock(int adjustment) throws IOException, JDOMException {
 		Element root = new Element("adjustItemStock", ns);
 		Element e1 = new Element("shopKey", ns);
@@ -173,17 +139,7 @@ public class CloudHandler {
 	
 		Document doc = new Document(root);
 		
-		try
-		{
-			Validator.validateXML(doc, Paths.get(validatorPath));
-			// brug itemId til at lave modifyItem xml
-			postToCloud(doc, "adjustItemStock");
-		}
-		catch(Exception e)
-		{
-			System.out.println("The XML document is not valid...");
-			return;
-		}
+		postToCloud(doc, "adjustItemStock");
 	}
 	public String login(String user, String password) throws IOException, JDOMException {
 		// Opret dokument
@@ -198,44 +154,16 @@ public class CloudHandler {
 		XMLOutputter xmlOutput = new XMLOutputter(Format.getPrettyFormat());
 		System.out.println("LOGIN METODE");
 		xmlOutput.output(doc, System.out);
-		try
-		{
-			Validator.validateXML(doc, Paths.get(validatorPath));
-			System.out.println("efter validate");
-			Document requestDoc = postToCloud(doc,"login");
-			
-			
-			// lav request til server med dokumentet
-			
-			try
-			{				
-				Validator.validateXML(requestDoc, Paths.get(validatorPath));
-				
-				// laes respons
-				String loginResponse = requestDoc.getRootElement().getChildText("customerName",ns);
-				System.out.println("My login response: " + loginResponse + "\n");	
-				return loginResponse;
-			}
-			catch(JDOMException e){
-				System.out.println("1 + The XML document is not valid...");
-				return "";
-			}
-			catch(Exception e){
-					System.out.println(e);
-					return "";
-			}
-		}
-		catch(JDOMException e) {
-			System.out.println("2 + The XML document is not valid...");
-			e.printStackTrace();
-			return "";
-		}
-		catch(Exception e) {
-			//System.out.println(e);
-			e.printStackTrace();
-			return "";
-		}
+		
+		Document requestDoc = postToCloud(doc,"login");
+		
+		// laes respons
+		String loginResponse = requestDoc.getRootElement().getChildText("customerName",ns);
+		System.out.println("My login response: " + loginResponse + "\n");	
+		
+		return loginResponse;
 	}
+	
 	public ArrayList<Item> listItems() throws IOException, JDOMException {
 		Document doc = getFromCloud("listItems?shopID="+_shopID);
 		ArrayList<Item> items = new ArrayList<Item>();
