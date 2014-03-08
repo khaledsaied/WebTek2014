@@ -26,8 +26,8 @@ public class CloudHandler {
 	private static String baseUrl = "http://services.brics.dk/java4/cloud/";
 	private static Namespace ns = Namespace.getNamespace("http://www.cs.au.dk/dWebTek/2014");
 	private static HttpURLConnection cloudCon;
-	//String validatorPath = "/WEB-INF/Validator"+File.separator+"cloud.xsd";
-	String validatorPath = "/Users/Dan/Dropbox/6. Semester/Programs/WebTek2014/Handin4/WebContent/Validator/cloud.xsd";
+	String validatorPath = "Validator"+File.separator+"cloud.xsd";
+	//String validatorPath = "/Users/Dan/Dropbox/6. Semester/Programs/WebTek2014/Handin4/WebContent/Validator/cloud.xsd";
 	//private static String _customerID = null;
 	private static String _itemID = null;
 	//private static String _loginResponse = null;
