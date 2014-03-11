@@ -1,27 +1,27 @@
 $(document).ready(function() {
 	$('#homePage').click(function() {
-		$('#mainContainer').load('home.html');
+		$('#mainContainer').load('views/home.html');
 	});
 	$('#productsPage').click(function() {
-		$('#mainContainer').load('products.html');
+		$('#mainContainer').load('views/products.html');
 		$.get('rest/shop/cloudItems', function(itemsText) {
 			var items = JSON.parse(itemsText);
 			addItemsToTable(items);
 		});
 	});
 	$('#aboutPage').click(function() {
-		$('#mainContainer').load('about.html');
+		$('#mainContainer').load('views/about.html');
 	});
 	$('#contactPage').click(function() {
-		$('#mainContainer').load('contact.html');
+		$('#mainContainer').load('views/contact.html');
 	});
 	$('#loginPage').click(function() {
-		$('#mainContainer').load('login.html');
+		$('#mainContainer').load('views/login.html');
 		$.get('rest/shop/loggedInBool', function(logInResponse) {
 			if (logInResponse == "true") {
-				$('#mainContainer').load('logout.html');
+				$('#mainContainer').load('views/logout.html');
 			} else {
-				$('#mainContainer').load('login.html');
+				$('#mainContainer').load('views/login.html');
 			}
 		});
 	});
