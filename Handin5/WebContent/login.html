@@ -1,0 +1,49 @@
+<h2>Login</h2>
+<p id="welcome"></p>
+<section class="loginform cf">
+	<form name="login" accept-charset="utf-8">
+		<ul>
+			<li><label for="username">Username</label> <input
+				name="username" id="username" placeholder="username" required></li>
+			<li><label for="password">Password</label> <input id="password"
+				type="password" name="password" placeholder="password"
+				pattern=".{3,20}" title="Minmimum 3 letters or numbers and max 20."
+				required></li>
+			<li><input type="button" value="Login" id="btnLogin">
+		</ul>
+	</form>
+</section>
+<p id="loginStatus">NOT LOGGED IN</p>
+
+<script>
+	$('#btnLogin').click(
+			function() {
+				var username = document.getElementById("username").value;
+				var password = document.getElementById("password").value;
+				$.post('rest/shop/login', "user=" + username + "&password="
+						+ password, function(itemsText) {
+					alert(itemsText);
+					if (itemsText == "success") {
+						loginSuccessMessage(username);
+					} else if (itemsText == "fail") {
+						loginFailMessage();
+					}
+					loginMessage();
+				});
+			});
+	function loginSuccessMessage(name) {
+		var loginStatus = document.getElementById("loginStatus");
+		var welcome = document.getElementById("welcome");
+		welcome.textContent = "Welcome " + name;
+		loginStatus.textContent = "Logged In";
+
+		setTimeout(function() {
+			location.reload();
+		}, 1000);
+
+	}
+	function loginFailMessage() {
+		var loginStatus = document.getElementById("loginStatus");
+		loginStatus.textContent = "Fail!";
+	}
+</script>

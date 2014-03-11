@@ -1,12 +1,44 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>Handin5</display-name>
+<?xml version="1.0"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xmlns="http://java.sun.com/xml/ns/javaee" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+                             http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" 
+         version="3.0">
+  <display-name>PerleShop JSF</display-name>
+
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+ 
+ <!-- FILTER FOR LOGIN  -->
+  <!--  <filter>
+  	<filter-name>My Login Filter</filter-name>
+  	<filter-class>LoginFilter</filter-class>
+  </filter>   
+  <filter-mapping>
+  	<filter-name>My Login Filter</filter-name>
+  	<url-pattern>/admin.jsf</url-pattern>
+  </filter-mapping>
+  -->
+  
+  
+  <!--  The lower part for Restful Web Application is added from handin4 template files -->
+
+	<servlet>
+		<servlet-name>jersey-servlet</servlet-name>    <!-- Tomcat only looks for annotated classes in WEB-INF/classes. Jersey is in a .jar file -->
+        <servlet-class>
+            org.glassfish.jersey.servlet.ServletContainer
+        </servlet-class>
+        <init-param>
+		     <param-name>jersey.config.server.provider.packages</param-name>
+		     <param-value>dk.cs.dwebtek</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>jersey-servlet</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+  
 </web-app>

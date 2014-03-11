@@ -1,0 +1,313 @@
+body {
+	background-color: #d0e4fe;
+	margin: 0px;
+}
+
+h1.bodyTitle {
+	text-align: center;
+	color: orange;
+}
+
+p {
+	font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif",
+		Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif",
+		Georgia, serif;
+	font-size: 18px;
+}
+
+#topMenu {
+	background: black;
+	font-size: 22px;
+	font-weight: bold;
+	color: #FFFFFF;
+	padding: 15px;
+	margin: 0px;
+}
+
+#topMenu ul {
+	margin-left: 0;
+	padding-left: 0;
+	display: inline;
+	line-height: 2em;
+	Modify
+}
+
+#topMenu ul li {
+	margin-left: 0;
+	padding: 3px 15px;
+	border-left: #FFFFFF solid 4px;
+	list-style: none;
+	display: inline;
+}
+
+#topMenu ul li.first {
+	margin-left: 0;
+	border-left: none;
+	list-style: none;
+	display: inline;
+}
+
+#topMenu a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+#topMenu a:hover {
+	color: orange;
+}
+/*#topMenu a:active, #topMenu a.selected {
+    color: #000;
+    background: -webkit-gradient(linear, left top, left bottom, from(#DFE7FA), to(#FFF));
+    border-bottom-width:0px;
+} */
+#topMenu ul li.login {
+	float: right;
+}
+
+#mainContainer {
+	margin: 10px 10px 50px 10px;
+}
+
+/******************************************************************
+Basket styling
+******************************************************************/
+
+#basketContainer{
+	float: right;
+	width: 150px;
+}
+
+.pull-me{
+    -webkit-box-shadow: 0 0 8px #C0C0C0;
+    -moz-box-shadow: 0 0 8px #C0C0C0;
+    box-shadow: 0 0 8px #C0C0C0;
+    cursor:pointer;
+}
+.panel {
+	background: #FFFFFF;
+	border-left: black solid 2px;
+	border-right: black solid 2px;
+    background-size:90% 90%;
+    height:300px;
+	display:none;
+    font-family:garamond,times-new-roman,serif;
+}
+.panel p{
+    text-align:center;
+}
+.slide {
+	margin:0;
+	padding:0;
+	border-top:solid 2px black;
+}
+.pull-me {
+	display:block;
+    position:relative;
+
+    width:150px;
+    height:20px;
+	font-family:arial,sans-serif;
+    font-size:14px;
+	color:#ffffff;
+    background: black;
+	text-decoration:none;
+    -moz-border-bottom-left-radius:5px;
+    -moz-border-bottom-right-radius:5px;
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px;
+}
+.pull-me p {
+    text-align:center;
+}
+
+#footer {
+	background: #121214;
+	color: #FFFFFF;
+	font-weight: bold;
+	text-align: center;
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	vertical-align: bottom;
+	display: block;
+	padding: 10px;
+}
+
+#footer ul {
+	margin-left: 0;
+	padding-left: 0;
+	display: inline;
+}
+
+#footer ul li {
+	margin-left: 0;
+	padding: 3px 15px;
+	border-left: #FFFFFF solid 1px;
+	list-style: none;
+	display: inline;
+}
+
+#footer ul li.first {
+	margin-left: 0;
+	border-left: none;
+	list-style: none;
+	display: inline;
+}
+
+#footer a {
+	color: #FFFFFF;
+	font-style: italic;
+	text-decoration: none;
+}
+
+#footer a:hover {
+	color: orange;
+}
+
+#buildMsg {
+	background: #FF0000;
+	font-size: 30px;
+	color: white;
+	text-align: center;
+	display: block;
+}
+
+#products td {
+	border: 1px black solid;
+}
+
+#products thead {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+
+/*** TABLE DESIGN ***/ 
+#itemtablebody { 
+	font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+	border-collapse:collapse;
+	border:1px solid #000000;	
+}
+#itemtablebody th {
+	color: #FFFFFF;
+	font-size:22px;
+	text-align:center;
+	background:none repeat scroll 0 0 #2b2b2b;/*#B5B5B5;*/
+	border-bottom:1px solid #000000;  
+	padding:5px;
+	font-size: 22px;
+	text-align: center;
+	background: none repeat scroll 0 0 #2b2b2b; /*#B5B5B5;*/
+	border-bottom: 1px solid #000000;
+	padding: 2px;
+}
+#itemtablebody tr:nth-child(odd) {
+	color:#666666;
+	text-align:center;
+	background:none repeat scroll 0 0 white;
+}
+#itemtablebody tr:nth-child(even) {
+	color:#666666;
+	text-align:center;
+	background:none repeat scroll 0 0 #D9D9D9;	
+}
+/*************************************/
+
+
+/*** JSF TABLE DESIGN ***/
+/*
+.itemTableOddRow {
+	color: #666666;
+	text-align: center;
+	background: none repeat scroll 0 0 white;
+}
+
+.itemTableEvenRow {
+	color:#666666;
+	text-align:center;
+	background:none repeat scroll 0 0 #D9D9D9;
+}*/
+/************************/
+.createItem {
+	font-weight: bold;
+	color: green;
+	font-size: 30px;
+}
+
+input[type=text] {
+	padding: 5px;
+	border: 2px solid #ccc;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+input[type=text]:focus {
+	border-color: #333;
+}
+
+#inputBoxes {
+	float: left;
+	color: red;
+	margin: auto;
+}
+
+/****** Login design ***********/
+.loginform ul {  
+    padding: 0;  
+    margin: 0;  
+}  
+.loginform li {  
+    display: inline;  
+    float: left;  
+}  
+label {  
+    display: block;  
+    color: #999;  
+}  
+.cf:before,  
+.cf:after {  
+    content: "";   
+    display: table;  
+}  
+  
+.cf:after {  
+    clear: both;  
+}  
+.cf {  
+    *zoom: 1;  
+}  
+:focus {  
+    outline: 0;  
+}  
+
+.loginform input:not([type=submit]) {  
+    padding: 5px;  
+    margin-right: 10px;  
+    border: 1px solid rgba(0, 0, 0, 0.3);  
+    border-radius: 3px;  
+    box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.1),   
+                0px 1px 0px 0px rgba(250, 250, 250, 0.5) ;  
+}
+.loginform input[type=button] 
+{    
+    border: 1px solid rgba(0, 0, 0, 0.3);  
+    background: #64c8ef; /* Old browsers */  
+    background: -moz-linear-gradient(top,  #64c8ef 0%, #00a2e2 100%); /* FF3.6+ */  
+    background: -webkit-gradient(linear, left top, left bottombottom, color-stop(0%,#64c8ef), color-stop(100%,#00a2e2)); /* Chrome,Safari4+ */  
+    background: -webkit-linear-gradient(top,  #64c8ef 0%,#00a2e2 100%); /* Chrome10+,Safari5.1+ */  
+    background: -o-linear-gradient(top,  #64c8ef 0%,#00a2e2 100%); /* Opera 11.10+ */  
+    background: -ms-linear-gradient(top,  #64c8ef 0%,#00a2e2 100%); /* IE10+ */  
+    background: linear-gradient(to bottombottom,  #64c8ef 0%,#00a2e2 100%); /* W3C */  
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#64c8ef', endColorstr='#00a2e2',GradientType=0 ); /* IE6-9 */  
+    color: #fff;  
+    padding: 5px 15px;  
+    margin-right: 0;  
+    margin-top: 15px;  
+    border-radius: 3px;  
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);  
+}  
+#loginStatus {
+ font-size: 12px;
+ font-weight:bold;
+ color: red;
+}
