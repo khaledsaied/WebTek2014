@@ -184,7 +184,7 @@ public class CloudHandler {
 		
 		return items;
 	}
-	
+		
 	public ArrayList<Customer> listCustomers() throws IOException, JDOMException {
 		Document doc = getFromCloud("listCustomers");
 		ArrayList<Customer> customers = new ArrayList<Customer>();
@@ -197,6 +197,21 @@ public class CloudHandler {
 			customers.add(new Customer(customerID,customerName));
 		}
 		return customers;
+	}
+	
+	public ArrayList<Shop> listShops() throws IOException, JDOMException {
+		Document doc = getFromCloud("listShops");
+		ArrayList<Shop> shops = new ArrayList<Shop>();
+		
+		Iterator<?> i = doc.getDescendants(new ElementFilter("shop",ns));
+		while(i.hasNext()) {
+			Element element = (Element)i.next();
+			int shopID = Integer.parseInt(element.getChildText("shopID",ns));
+			String shopURL = element.getChildText("shopURL",ns);
+			String shopName = element.getChildText("shopName",ns);
+			shops.add(new Shop(shopID,shopURL,shopName));
+		}
+		return shops;
 	}
 
 	public Document getFromCloud(String request) throws IOException, JDOMException {

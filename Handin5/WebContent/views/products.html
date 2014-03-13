@@ -10,7 +10,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
  $.get('rest/shop/loggedInBool', function(loggedInResponse) {
-  if(loggedInResponse == "true") {
+  if(loggedInResponse == "true"){
     $('#btnBuy').attr("disabled", false); // enable buy button   
    }
   else {
@@ -18,4 +18,5 @@ $(document).ready(function() {
   }
  });
 });
+
 </script>
