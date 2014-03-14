@@ -7,6 +7,7 @@ public class Item {
 	private String _itemURL;
 	private int _itemStock;
 	private String _itemDescription;
+	private String[][] _itemCoordinates;
 
 	public Item(int id, String name, int price, String URL, int stock, String description) {
 		this._itemID = id;
@@ -34,6 +35,9 @@ public class Item {
 	public void setDescription(String _itemDescription) {
 		this._itemDescription = _itemDescription;
 	}
+	public void setCoordinates(String[][] _itemCoordinates) {
+		this._itemCoordinates = _itemCoordinates;
+	}
 	public int getID() {
 		return _itemID;
 	}
@@ -51,5 +55,8 @@ public class Item {
 	}	
 	public String getDescription(){
 		return _itemDescription;
+	}
+	public String[][] getCoordinates(){
+		return _itemCoordinates;
 	}
 }
