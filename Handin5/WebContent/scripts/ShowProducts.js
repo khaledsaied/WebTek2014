@@ -1,6 +1,6 @@
-function showProducts(items) {
+function showProducts(items, table) {
 	// Get the table body we we can add items to it
-	var tableBody = document.getElementById("itemtablebody");
+	var tableBody = document.getElementById(table);
 	var thead = document.createElement("thead");
 	var tr2 = document.createElement("tr");
 

@@ -14,7 +14,7 @@ $(document).ready(function() {
 		//var shopID = document.getElementById("shopList").value;
 		$.get('rest/shop/cloudItems', function(cloudProducts) {
 			var items = JSON.parse(cloudProducts);
-			showProducts(items);
+			showProducts(items, "itemtablebody");
 		});
 	});
 	$('#contactPage').click(function() {
