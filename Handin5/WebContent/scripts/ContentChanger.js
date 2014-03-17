@@ -1,7 +1,4 @@
 $(document).ready(function() {
-	
-//	if (this === "http://localhost:8080/Handin5/#PRODUCTS")
-//		$('#mainContainer').load('views/products.html');
 	$('#homePage').click(function() {
 		$('#mainContainer').load('views/home.html');
 	});
@@ -56,24 +53,12 @@ function showShops(shops) {
         },
         success: function (cloudProducts) {
             //alert(JSON.stringify(msg));
-    	   //var items =JSON.parse(cloudProducts);
    			showProducts(cloudProducts);
         },
         error: function () {
             alert("Network error");
         }
     });
-	// Get Items for shop on first load
-//	
-//	$.get('rest/shop/cloudItems/'+shops[index].shopID, function(cloudProducts) {
-//		var items = jQuery.parseJSON(cloudProducts);
-//		showProducts(items);
-//	});
-//	sendRequest("POST", 'rest/shop/cloudItems/'+shops[index].shopID, function(cloudProducts) {
-//		var items = jQuery.parseJSON(cloudProducts);
-//		showProducts(items);
-//	});
-
 	shopList.addEventListener("change",	
 			function() {
 				index = $("#shopList").prop("selectedIndex");
@@ -85,25 +70,15 @@ function showShops(shops) {
 			        beforeSend: function(xhrObj){
 		                xhrObj.setRequestHeader("Content-Type","application/json");
 		                xhrObj.setRequestHeader("Accept","application/json");
-		        },
+			        },
 			       success: function (cloudProducts) {
 			            //alert(JSON.stringify(cloudProducts));
-			            //var items = jQuery.parseJSON(cloudProducts);
 						showProducts(cloudProducts);
 			        },
 			        error: function () {
 			            alert("Network error");
 			        }
 			    });
-				//alert(this.selected);
-//				$.get('rest/shop/cloudItems/'+shops[index].shopID, function(cloudProducts) {
-//					var items = jQuery.parseJSON(cloudProducts);
-//					showProducts(items);
-//				});
-//				sendRequest("POST", 'rest/shop/cloudItems/'+shops[index].shopID, function(cloudProducts) {
-//					var items = jQuery.parseJSON(cloudProducts);
-//					showProducts(items);
-//				});
 	});
 }
 
