@@ -178,8 +178,8 @@ public class CloudHandler {
 
 			itemList.add(new Item(itemChild.getChildText("itemID",ns), itemChild
 					.getChildText("itemName",ns),
-					itemChild.getChildText("itemURL",ns),
 					itemChild.getChildText("itemPrice",ns),
+					itemChild.getChildText("itemURL",ns),
 					itemChild.getChildText("itemStock",ns),
 					itemDescription));
 		}
