@@ -3,6 +3,7 @@ public class Shop
 {
 	// Private member variables
 	private int _shopID;
+
 	private String _shopURL;
 	private String _shopName;
 	
@@ -19,7 +20,9 @@ public class Shop
 	{
 		return _shopID;
 	}
-	
+	public void setShopID(int _shopID) {
+		this._shopID = _shopID;
+	}
 	public String getShopURL()
 	{
 		return _shopURL;

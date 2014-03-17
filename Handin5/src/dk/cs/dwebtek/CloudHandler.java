@@ -23,7 +23,7 @@ import org.jdom2.output.XMLOutputter;
 public class CloudHandler {
 	int responseCode;
 	private static String _shopKey = "CF5576E136AC07922AF7F568";
-	private static String _shopID = "530";
+	private static int _shopID = 530;
 	private static String baseUrl = "http://services.brics.dk/java4/cloud/";
 	private static Namespace ns = Namespace.getNamespace("http://www.cs.au.dk/dWebTek/2014");
 	private static HttpURLConnection cloudCon;
@@ -59,13 +59,13 @@ public class CloudHandler {
 		e1.setText(_shopKey);
 		root.addContent(e1);
 		Element e2 = new Element("itemID", ns);
-		e2.setText(Integer.toString(item.getID()));
+		e2.setText(item.getID());
 		root.addContent(e2);
 		Element e3 = new Element("itemName", ns);
 		e3.setText(item.getName());
 		root.addContent(e3);
 		Element e4 = new Element("itemPrice", ns);
-		e4.setText(Integer.toString(item.getPrice()));
+		e4.setText(item.getPrice());
 		root.addContent(e4);
 		Element e5 = new Element("itemURL", ns);
 		e5.setText(item.getURL());
@@ -165,24 +165,45 @@ public class CloudHandler {
 		return loginResponse;
 	}
 	
-	public ArrayList<Item> listItems() throws IOException, JDOMException {
-		Document doc = getFromCloud("listItems?shopID="+_shopID);
-		ArrayList<Item> items = new ArrayList<Item>();
-		
-		Iterator<?> i = doc.getDescendants(new ElementFilter("item",ns));
-		while(i.hasNext()) {
-			Element element = (Element)i.next();
-			int itemID = Integer.parseInt(element.getChildText("itemID",ns));
-			String itemName = element.getChildText("itemName",ns);
-			String itemURL = element.getChildText("itemURL",ns);
-			int itemPrice = Integer.parseInt(element.getChildText("itemPrice",ns));
-			int itemStock = Integer.parseInt(element.getChildText("itemStock",ns));
-			String itemDescription = element.getChild("itemDescription", ns).getChildText("document",ns);
-			
-			items.add(new Item(itemID,itemName,itemPrice,itemURL,itemStock,itemDescription));
+	public ArrayList<Item> listItems(int shopID) throws IOException, JDOMException {
+		Document doc = getFromCloud("listItems?shopID="+shopID);
+		ArrayList<Item> itemList = new ArrayList<Item>();
+
+		for (Element itemChild : doc.getRootElement().getChildren()) {
+
+			String itemDescription = generateItemDescriptionHTML(itemChild
+							.clone()
+							.getChild(
+									"itemDescription",ns));
+
+			itemList.add(new Item(itemChild.getChildText("itemID",ns), itemChild
+					.getChildText("itemName",ns),
+					itemChild.getChildText("itemURL",ns),
+					itemChild.getChildText("itemPrice",ns),
+					itemChild.getChildText("itemStock",ns),
+					itemDescription));
 		}
+//		ArrayList<Item> items = new ArrayList<Item>();
+//		
+//
+//		Iterator<?> i = doc.getDescendants(new ElementFilter("item",ns));
+//		while(i.hasNext()) {
+//			Element element = (Element)i.next();
+//			String itemID = element.getChildText("itemID",ns);
+//			String itemName = element.getChildText("itemName",ns);
+//			String itemURL = element.getChildText("itemURL",ns);
+//			String itemPrice = element.getChildText("itemPrice",ns);
+//			String itemStock = element.getChildText("itemStock",ns);
+//			
+//			String itemDescription = element.clone().getChildText("itemDescription", ns);
+//			//String itemDescription = element.clone().getChild("itemDescription", ns).getChildText("document",ns);
+////			String itemDescription = generateItemDescriptionHTML((element
+////					.clone())
+////					.getChild("itemDescription",ns));
+//			
+			//items.add(new Item(itemID,itemName,itemPrice,itemURL,itemStock,itemDescription));
+		return itemList;
 		
-		return items;
 	}
 		
 	public ArrayList<Customer> listCustomers() throws IOException, JDOMException {
@@ -197,6 +218,11 @@ public class CloudHandler {
 			customers.add(new Customer(customerID,customerName));
 		}
 		return customers;
+	}
+
+	public void selectedShop(int ID) {
+		//shop.setShopID(ID);
+		_shopID = ID;
 	}
 	
 	public ArrayList<Shop> listShops() throws IOException, JDOMException {
@@ -296,7 +322,8 @@ public class CloudHandler {
 		}	
 		return doc;
 	}
-public String generateItemDescriptionHTML(Element root) {
+	
+	public String generateItemDescriptionHTML(Element root) {
 		String result = "";
 		result += generateHTMLFromElement(root, true);
 		result += root.getText();
@@ -308,26 +335,25 @@ public String generateItemDescriptionHTML(Element root) {
 		return result;
 	}
 
-private String generateHTMLFromElement(Element element, Boolean start) {
-	String result = "<";
-	String tag = element.getName();
-	if (!start) {
-		result += "/";
+	private String generateHTMLFromElement(Element element, Boolean start) {
+		String result = "\u003c";
+		String tag = element.getName();
+		if (!start) {
+			result += "/";
+		}
+		if (tag == "document") {
+			result += "div\u003e";
+		} else if (tag == "italics") {
+			result += "i\u003e";
+		} else if (tag == "bold") {
+			result += "b\u003e";
+		} else if (tag == "list") {
+			result += "ul\u003e";
+		} else if (tag == "item") {
+			result += "li\u003e";
+		} else {
+			return "";
+		}
+		return result;
 	}
-	if (tag == "document") {
-		result += "div>";
-	} else if (tag == "italics") {
-		result += "i>";
-	} else if (tag == "bold") {
-		result += "b>";
-	} else if (tag == "list") {
-		result += "ul>";
-	} else if (tag == "item") {
-		result += "li>";
-	} else {
-		return "";
-	}
-	return result;
-}
-	
 }

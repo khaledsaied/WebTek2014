@@ -1,14 +1,14 @@
 package dk.cs.dwebtek;
 
 public class Item {
-	private int _itemID;
+	private String _itemID;
 	private String _itemName;
-	private int _itemPrice;
+	private String _itemPrice;
 	private String _itemURL;
-	private int _itemStock;
+	private String _itemStock;
 	private String _itemDescription;
 
-	public Item(int id, String name, int price, String URL, int stock, String description) {
+	public Item(String id, String name, String price, String URL, String stock, String description) {
 		this._itemID = id;
 		this._itemName = name;
 		this._itemURL = URL;
@@ -16,37 +16,37 @@ public class Item {
 		this._itemStock = stock;
 		this._itemDescription = description;
 	}
-	public void setID(int _itemID) {
+	public void setID(String _itemID) {
 		this._itemID = _itemID;
 	}
 	public void setName(String _itemName) {
 		this._itemName = _itemName;
 	}
-	public void setPrice(int _itemPrice) {
+	public void setPrice(String _itemPrice) {
 		this._itemPrice = _itemPrice;
 	}
 	public void setURL(String _itemURL) {
 		this._itemURL = _itemURL;
 	}
-	public void setStock(int _itemStock) {
+	public void setStock(String _itemStock) {
 		this._itemStock = _itemStock;
 	}
 	public void setDescription(String _itemDescription) {
 		this._itemDescription = _itemDescription;
 	}
-	public int getID() {
+	public String getID() {
 		return _itemID;
 	}
 	public String getName(){
 		return _itemName;
 	}
-	public int getPrice(){
+	public String getPrice(){
 		return _itemPrice;
 	}
 	public String getURL(){
 		return _itemURL;
 	}
-	public int getStock(){
+	public String getStock(){
 		return _itemStock;
 	}	
 	public String getDescription(){

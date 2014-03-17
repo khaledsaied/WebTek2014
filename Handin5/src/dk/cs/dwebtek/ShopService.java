@@ -14,6 +14,8 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
@@ -31,12 +33,13 @@ public class ShopService {
 	}
 
 	CloudHandler cloud = new CloudHandler();
-
+	Shop shop;
 	@GET
-	@Path("cloudItems")
-	public String getItemsFromCloud() throws IOException,
+	@Path("cloudItems/{shopId}")
+	public String getItemsFromCloud(@PathParam("shopId") int shopId) throws IOException,
 			JDOMException {
-		ArrayList<Item> items = cloud.listItems();
+		//cloud.selectedShop(itemID);
+		ArrayList<Item> items = cloud.listItems(shopId);
 		JSONArray mJSONArray = new JSONArray(items);
 
 		return mJSONArray.toString();

@@ -1,6 +1,46 @@
 function showProducts(items) {
+//	$.get('rest/shop/shops', function(shopList) {
+//		var shops = JSON.parse(shopList);
+//		for (var i = 0; i < shops.length; i++) {
+//			(function() {
+//
+//				var shop = shops[i];
+//				// Create a new line for this item
+//				
+//				var shopList = document.getElementById("shopList");
+//				var option = document.createElement("option");
+//				option.textContent = shop.shopName;
+//				
+//				option
+//				.addEventListener("click",	
+//						function() {
+//					$.get('rest/shop/cloudItems',"shopId="+530, function(cloudProducts) {
+//						var items = JSON.parse(cloudProducts);
+//						showProducts(items);
+//					});
+//							sendRequest("GET",'rest/shop/cloudItems', "shopId="+shop.shopID,function(cloudProducts) {
+//								
+//									});
+//						});
+//
+//				shopList.appendChild(option);
+//			}());
+//		}
+//	});
+	
+//	$('#shopList').change(function() {
+//		//var shop = document.getElementById('shopList>option:selected').text();
+//		//var shop = $('#shopList').val();
+//		var index = $("#shopList").prop("selectedIndex");
+//		alert(shops[index].shopID);
+//		
+//	});
+	
 	// Get the table body we we can add items to it
 	var tableBody = document.getElementById("itemtablebody");
+	//Remove all contents of the table body (if any exist)
+    tableBody.innerHTML = "";
+    
 	var thead = document.createElement("thead");
 	var tr2 = document.createElement("tr");
 
@@ -42,7 +82,6 @@ function showProducts(items) {
 			var item = items[i];
 			// Create a new line for this item
 			var tr = document.createElement("tr");
-
 			var nameCell = document.createElement("td");
 			nameCell.textContent = item.name;
 			tr.appendChild(nameCell);

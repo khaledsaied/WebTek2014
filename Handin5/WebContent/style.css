@@ -311,3 +311,15 @@ label {
  font-weight:bold;
  color: red;
 }
+#div1 {width:350px;height:70px;padding:10px;border:2px solid #000;}
+ul, li{
+			list-style: none;
+			margin: 0px;
+			padding: 0px;
+			cursor: pointer;
+}
+section#cart ul{
+	height: 200px;			
+	overflow: auto;
+	background-color: #cccccc;
+}
